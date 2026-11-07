@@ -182,18 +182,18 @@ INDEX = """<section class="hero" id="top">
   <div class="hero__bg" data-bg-photo aria-hidden="true" data-ph-label="Фото зала «Счастье есть»"><img data-img="guests1" alt="Гости в лофте «Счастье есть»" ></div>
   <div class="hero__inner">
     <div class="container">
+      <div class="hero__facts">
+        <div class="fact"><div class="fact__value">5,0</div><div class="fact__label">Яндекс · 2ГИС</div></div>
+        <div class="fact"><div class="fact__value">09–21</div><div class="fact__label">Каждый день</div></div>
+        <div class="fact"><div class="fact__value fact__value--sm">ул. 1905 года, 2</div><div class="fact__label">Орехово-Зуево, 1 этаж</div></div>
+        <div class="fact"><div class="fact__value">21</div><div class="fact__label">фотография в галерее</div></div>
+      </div>
       <span class="eyebrow" style="color:var(--terracotta-soft)">Лофт-пространство и кофейня</span>
       <h1>Место, где <em>правда</em> есть счастье</h1>
       <p class="hero__lead">Кофе и домашняя выпечка каждый день, лофт для праздника, мастер-классы для детей и взрослых. Орехово-Зуево, улица 1905 года, 2 — первый этаж, вход с пандусом.</p>
       <div class="hero__actions">
         <a class="btn btn--primary" href="booking.html">Оставить заявку</a>
         <a class="btn btn--ghost" href="menu.html">Смотреть меню</a>
-      </div>
-      <div class="hero__facts">
-        <div class="fact"><div class="fact__value">5,0</div><div class="fact__label">Яндекс · 2ГИС</div></div>
-        <div class="fact"><div class="fact__value">09–21</div><div class="fact__label">Каждый день</div></div>
-        <div class="fact"><div class="fact__value fact__value--sm">ул. 1905 года, 2</div><div class="fact__label">Орехово-Зуево, 1 этаж</div></div>
-        <div class="fact"><div class="fact__value">21</div><div class="fact__label">фотография в галерее</div></div>
       </div>
     </div>
   </div>

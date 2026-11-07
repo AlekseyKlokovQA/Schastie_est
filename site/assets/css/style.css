@@ -206,8 +206,10 @@ body.nav-open .burger span::after { transform: translateY(-6px) rotate(-45deg); 
 
 .hero__facts {
   display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1px; margin-top: clamp(38px, 6vw, 64px);
+  gap: 1px; margin: 0 0 clamp(28px, 4vw, 44px);
   background: rgba(251, 246, 239, .18); border-radius: var(--radius-m); overflow: hidden;
+  /* полоса идёт первой в герое — не даём ей растянуться на всю строку сетки */
+  max-width: 760px;
 }
 .fact { padding: 20px 22px; background: rgba(28, 20, 15, .42); backdrop-filter: blur(6px); }
 .fact__value { font-family: var(--font-display); font-size: 1.9rem; line-height: 1.05; color: var(--cream); }
@@ -633,6 +635,12 @@ body.nav-open .burger span::after { transform: translateY(-6px) rotate(-45deg); 
   .gallery__item--wide, .gallery__item--narrow, .gallery__item--half, .gallery__item--third { grid-column: span 12; }
   .grid--2, .grid--4 { grid-template-columns: 1fr; }
   .hero__actions .btn { width: 100%; }
+  /* полоса фактов вверху героя: на узком экране — 2×2, компактнее */
+  .hero__facts { margin-bottom: 24px; border-radius: var(--radius-s); }
+  .fact { padding: 14px 16px; }
+  .fact__value { font-size: 1.5rem; }
+  .fact__value--sm { font-size: .9rem; }
+  .fact__label { font-size: .66rem; }
   .cta-mobile {
     display: flex; position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
     padding: 10px 14px calc(10px + env(safe-area-inset-bottom));

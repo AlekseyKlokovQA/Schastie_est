@@ -40,6 +40,7 @@
       master4: 'https://avatars.mds.yandex.net/get-altay/13474366/2a000001928aa9015971c1ac59465d0e805c/XXXL',
       master5: 'https://avatars.mds.yandex.net/get-altay/13790728/2a000001928aa901f60545791c9985568b71/XXXL',
       master6: 'https://avatars.mds.yandex.net/get-altay/14097168/2a000001928aa901e042589b6492bb005179/XXXL',
+      master7: 'https://avatars.mds.yandex.net/get-altay/11748256/2a000001928aa901e1ad8150333ab7f887e0/XXXL',
       event1: 'https://avatars.mds.yandex.net/get-altay/13797017/2a000001928aa9731bf200ae689d02706328/XXXL',
       event2: 'https://avatars.mds.yandex.net/get-altay/13906970/2a000001928aa97570eb0a712b428bdd0abe/XXXL',
       event3: 'https://avatars.mds.yandex.net/get-altay/14238289/2a000001928aa972cfdd2f63588ead45a07f/XXXL',

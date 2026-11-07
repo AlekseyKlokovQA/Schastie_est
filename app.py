@@ -232,12 +232,18 @@ class Handler(SimpleHTTPRequestHandler):
     # -------------------------------------------------- health-check
     def health(self):
         index_ok = os.path.isfile(os.path.join(SITE, 'index.html'))
+        # порт берём у конкретного слушающего сокета, а не из переменной PORT
+        try:
+            actual_port = self.server.server_address[1]
+        except (AttributeError, IndexError):
+            actual_port = PORT
         return self._json(200, {
             'ok': True,
             'index_html': index_ok,
             'pages': sorted(set(PAGES.values())),
             'root': ROOT,
-            'port': PORT
+            'port': actual_port,
+            'host_header': self.headers.get('Host', '')
         })
 
     # -------------------------------------------------- API: чтение

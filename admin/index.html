@@ -6,7 +6,7 @@
 <title>Админ-панель · «Счастье есть»</title>
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#33271F">
-<link rel="icon" type="image/svg+xml" href="../site/assets/img/logo-green.svg">
+<link rel="icon" type="image/png" sizes="192x192" href="../site/assets/img/favicon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
     width: 100%; max-width: 400px; background: #fff; border-radius: 26px;
     padding: 36px 32px; box-shadow: 0 24px 60px rgba(51,39,31,.12); border: 1px solid var(--line);
   }
-  .login__logo { width: 62px; height: 62px; border-radius: 50%; margin: 0 auto 18px; }
+  .login__logo { width: 84px; height: 84px; border-radius: 0; object-fit: contain; margin: 0 auto 18px; }
   .login h1 { font-size: 1.9rem; text-align: center; margin-bottom: .3em; }
   .login p { text-align: center; font-size: .88rem; color: var(--ink-mute); margin-bottom: 22px; }
   .login .field input { background: #FBF6EF; }
@@ -36,7 +36,7 @@
     display: flex; flex-direction: column; gap: 4px; position: sticky; top: 0; height: 100vh;
   }
   .admin__brand { display: flex; align-items: center; gap: 11px; color: #FBF6EF; margin-bottom: 22px; padding: 0 8px; }
-  .admin__brand img { width: 40px; height: 40px; border-radius: 50%; }
+  .admin__brand img { width: 44px; height: 44px; border-radius: 0; object-fit: contain; }
   .admin__brand b { font-family: var(--font-display); font-size: 1.16rem; display: block; line-height: 1.1; }
   .admin__brand span { font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(251,246,239,.5); }
   .admin__nav { display: flex; flex-direction: column; gap: 3px; }
@@ -142,7 +142,7 @@
 <!-- ==================== ВХОД ==================== -->
 <div class="login" id="login">
   <div class="login__card">
-    <img class="login__logo" src="../site/assets/img/logo-green.svg" alt="">
+    <img class="login__logo" src="../site/assets/img/logo-green.png" alt="">
     <h1>Админ-панель</h1>
     <p>«Счастье есть» · управление сайтом</p>
     <form id="login-form">
@@ -164,7 +164,7 @@
 <div class="admin" id="admin" hidden>
   <aside class="admin__side">
     <div class="admin__brand">
-      <img src="../site/assets/img/logo-green.svg" alt="">
+      <img src="../site/assets/img/logo-green.png" alt="">
       <div><b>Счастье есть</b><span>Панель управления</span></div>
     </div>
     <nav class="admin__nav">
@@ -559,7 +559,7 @@
     grid.innerHTML = PHOTO_FIELDS.map(function (field) {
       var url = state.content.photos[field.key] || '';
       return '<div class="photo-card" data-key="' + field.key + '">' +
-        '<div class="photo-card__preview"><img src="' + esc(url || '../site/assets/img/logo-green.svg') + '" alt=""></div>' +
+        '<div class="photo-card__preview"><img src="' + esc(url || '../site/assets/img/logo-green.png') + '" alt=""></div>' +
         '<div class="photo-card__body">' +
           '<div class="photo-card__label">' + esc(field.label) + '</div>' +
           '<div class="photo-card__hint">' + esc(field.hint) + '</div>' +
@@ -576,7 +576,7 @@
     $$('.photo-card__preview img').forEach(function (img) {
       img.addEventListener('error', function () {
         img.parentNode.classList.add('is-broken');
-        img.src = '../site/assets/img/logo-green.svg';
+        img.src = '../site/assets/img/logo-green.png';
       });
     });
   }
@@ -587,7 +587,7 @@
     var card = input.closest('.photo-card');
     var img = $('.photo-card__preview img', card);
     $('.photo-card__preview', card).classList.remove('is-broken');
-    img.src = input.value || '../site/assets/img/logo-green.svg';
+    img.src = input.value || '../site/assets/img/logo-green.png';
   });
 
   document.addEventListener('click', function (e) {
@@ -601,7 +601,7 @@
     if (clear) {
       var box = clear.closest('.photo-card');
       $('[data-photo-url]', box).value = '';
-      $('.photo-card__preview img', box).src = '../site/assets/img/logo-green.svg';
+      $('.photo-card__preview img', box).src = '../site/assets/img/logo-green.png';
       $('.photo-card__preview', box).classList.remove('is-broken');
     }
   });
@@ -629,7 +629,7 @@
       var url = YANDEX_DEFAULTS[field.key] || '';
       $('[data-photo-url]', card).value = url;
       var img = $('.photo-card__preview img', card);
-      img.src = url || '../site/assets/img/logo-green.svg';
+      img.src = url || '../site/assets/img/logo-green.png';
       $('.photo-card__preview', card).classList.remove('is-broken');
     });
     flash('Подставлены ссылки из карточки Яндекс.Карт');

@@ -244,11 +244,18 @@
     var cap = $('.lightbox__cap', box);
     var index = 0;
 
+    function srcOf(btn) {
+      /* приоритет — актуальное фото в блоке (его могли заменить в админке) */
+      var inner = btn.querySelector('img');
+      if (inner && inner.getAttribute('src')) return inner.getAttribute('src');
+      return btn.getAttribute('data-lightbox');
+    }
+
     function show(i) {
       index = (i + triggers.length) % triggers.length;
       var btn = triggers[index];
-      img.src = btn.getAttribute('data-lightbox');
-      img.alt = btn.getAttribute('data-alt') || '';
+      img.src = srcOf(btn);
+      img.alt = btn.getAttribute('data-alt') || (btn.querySelector('img') ? btn.querySelector('img').alt : '');
       cap.textContent = (btn.getAttribute('data-cap') || '') + ' · ' + (index + 1) + ' / ' + triggers.length;
     }
     function open(i) {

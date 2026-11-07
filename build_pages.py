@@ -719,7 +719,7 @@ EVENTS = """<section class="page-hero">
     <div class="section-head reveal">
       <span class="eyebrow">Фотографии</span>
       <h2>Наши мероприятия</h2>
-      <p class="lead">Пять снимков из галереи заведения — оформление, столы и гости.</p>
+      <p class="lead">Шесть снимков из галереи заведения — оформление, столы и гости.</p>
     </div>
     <div class="gallery">
       <button class="gallery__item gallery__item--half ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/13797017/2a000001928aa9731bf200ae689d02706328/XXXL" data-cap="Оформление зала" data-alt="Оформление зала" data-ph-label="Фото мероприятия">
@@ -736,6 +736,9 @@ EVENTS = """<section class="page-hero">
       </button>
       <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/13929277/2a000001928aa973675fde3c29be02f92635/XXXL" data-cap="Атмосфера вечера" data-alt="Атмосфера" data-ph-label="Фото вечера">
         <img data-img="event5" alt="Атмосфера вечера" loading="lazy">
+      </button>
+      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/13790728/2a000001928aa977156831989f97d794c68d/XXXL" data-cap="Праздник в лофте" data-alt="Праздник в лофте" data-ph-label="Фото праздника">
+        <img data-img="event6" alt="Праздник в лофте" loading="lazy">
       </button>
     </div>
   </div>

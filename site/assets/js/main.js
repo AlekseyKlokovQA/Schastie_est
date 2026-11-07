@@ -69,15 +69,28 @@
       if (box) box.classList.remove('is-broken');
       if (url) {
         img.src = url;
+        /* обложка: то же фото дублируем фоном самого блока.
+           Если <img> по какой-то причине не отрисуется, фон всё равно
+           растянется на всю секцию через background-size: cover. */
+        var bg = img.closest('[data-bg-photo]');
+        if (bg) {
+          bg.style.backgroundImage = 'url("' + url + '")';
+          bg.style.backgroundSize = 'cover';
+          bg.style.backgroundPosition = 'center 40%';
+        }
       } else {
         img.removeAttribute('src');
         if (box) box.classList.add('is-broken');
+        var bgEmpty = img.closest('[data-bg-photo]');
+        if (bgEmpty) bgEmpty.style.backgroundImage = '';
       }
     });
   }
 
   function markBroken() {
     $$('img').forEach(function (img) {
+      /* обложка — фон, а не карточка: placeholder ей не нужен и вредит */
+      if (img.closest('[data-bg-photo]')) return;
       if (img.dataset.boundBroken) return;
       img.dataset.boundBroken = '1';
       img.addEventListener('error', function () {

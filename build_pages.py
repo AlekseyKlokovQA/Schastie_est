@@ -176,7 +176,7 @@ def page(filename, title, desc, active, body, og="https://avatars.mds.yandex.net
 # ГЛАВНАЯ
 # =====================================================================
 INDEX = """<section class="hero" id="top">
-  <div class="hero__bg" data-bg-photo aria-hidden="true" data-ph-label="Фото зала «Счастье есть»"><img data-img="guests1" src="" alt="Гости в лофте «Счастье есть»" ></div>
+  <div class="hero__bg" data-bg-photo aria-hidden="true" data-ph-label="Фото зала «Счастье есть»"><img data-img="guests1" alt="Гости в лофте «Счастье есть»" ></div>
   <div class="hero__inner">
     <div class="container">
       <span class="eyebrow" style="color:var(--terracotta-soft)">Лофт-пространство и кофейня</span>
@@ -216,12 +216,12 @@ INDEX = """<section class="hero" id="top">
       </div>
       <div class="reveal reveal--d1">
         <div class="media media--ratio-4-3 ph" data-ph-label="Фото интерьера">
-          <img data-img="menu2" src="" alt="Интерьер кофейни «Счастье есть»" loading="lazy">
+          <img data-img="menu2" alt="Интерьер кофейни «Счастье есть»" loading="lazy">
           <span class="media__cap">Зал, где проходят мастер-классы и праздники</span>
         </div>
         <div class="grid grid--2" style="margin-top:14px;gap:14px">
-          <div class="media media--ratio-1-1 ph" data-ph-label="Фото выпечки"><img data-img="menu1" src="" alt="Выпечка и десерты" loading="lazy"></div>
-          <div class="media media--ratio-1-1 ph" data-ph-label="Фото гостей"><img data-img="guests2" src="" alt="Гости заведения" loading="lazy"></div>
+          <div class="media media--ratio-1-1 ph" data-ph-label="Фото выпечки"><img data-img="menu1" alt="Выпечка и десерты" loading="lazy"></div>
+          <div class="media media--ratio-1-1 ph" data-ph-label="Фото гостей"><img data-img="guests2" alt="Гости заведения" loading="lazy"></div>
         </div>
       </div>
     </div>
@@ -286,7 +286,7 @@ INDEX = """<section class="hero" id="top">
       </div>
       <div class="reveal reveal--d1">
         <div class="media media--ratio-4-3 ph" data-ph-label="Фото мастер-класса">
-          <img data-img="master3" src="" alt="Мастер-класс в лофте" loading="lazy">
+          <img data-img="master3" alt="Мастер-класс в лофте" loading="lazy">
           <span class="media__cap">За столом — и дети, и родители</span>
         </div>
       </div>
@@ -310,7 +310,7 @@ INDEX = """<section class="hero" id="top">
       </div>
       <div class="reveal reveal--d1">
         <div class="media media--ratio-4-3 ph" data-ph-label="Фото мероприятия">
-          <img data-img="event1" src="" alt="Праздник в лофте «Счастье есть»" loading="lazy">
+          <img data-img="event1" alt="Праздник в лофте «Счастье есть»" loading="lazy">
           <span class="media__cap">Оформление и программа — наши</span>
         </div>
       </div>
@@ -361,7 +361,7 @@ INDEX = """<section class="hero" id="top">
       </div>
       <div class="reveal reveal--d1">
         <div class="media media--ratio-4-3 ph" data-ph-label="Фото главного входа">
-          <img data-img="entrance" src="" alt="Главный вход в «Счастье есть»" loading="lazy">
+          <img data-img="entrance" alt="Главный вход в «Счастье есть»" loading="lazy">
           <span class="media__cap">Так выглядит вход — ищите вывеску «Счастье есть»</span>
         </div>
         <div class="card card--flat" style="margin-top:14px;padding:22px">
@@ -392,7 +392,7 @@ INDEX = """<section class="hero" id="top">
 # МЕНЮ
 # =====================================================================
 MENU = """<section class="page-hero">
-  <div class="page-hero__bg" data-bg-photo aria-hidden="true" data-ph-label="Фото меню"><img data-img="menu3" src="" alt="Меню кофейни «Счастье есть»" ></div>
+  <div class="page-hero__bg" data-bg-photo aria-hidden="true" data-ph-label="Фото меню"><img data-img="menu3" alt="Меню кофейни «Счастье есть»" ></div>
   <div class="page-hero__inner container">
     <div class="breadcrumbs"><a href="index.html">Главная</a><span>/</span><span>Меню</span></div>
     <span class="eyebrow">Кофейня</span>
@@ -481,16 +481,16 @@ MENU = """<section class="page-hero">
     </div>
     <div class="gallery">
       <button class="gallery__item gallery__item--half ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/11018317/2a0000018cbc80be39818072da4bc6a2886a/XXXL" data-cap="Меню и витрина" data-alt="Фото меню" data-ph-label="Фото меню">
-        <img data-img="menu1" src="" alt="Фото меню" loading="lazy">
+        <img data-img="menu1" alt="Фото меню" loading="lazy">
       </button>
       <button class="gallery__item gallery__item--half ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/6382111/2a0000018cbc809395ac079d1d286f434f9d/XXXL" data-cap="Витрина с выпечкой" data-alt="Витрина" data-ph-label="Фото витрины">
-        <img data-img="menu2" src="" alt="Витрина" loading="lazy">
+        <img data-img="menu2" alt="Витрина" loading="lazy">
       </button>
       <button class="gallery__item gallery__item--half ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/892711/2a0000018cbc8093d9b247cebbd7f2950d66/XXXL" data-cap="Десерты" data-alt="Десерты" data-ph-label="Фото десертов">
-        <img data-img="menu3" src="" alt="Десерты" loading="lazy">
+        <img data-img="menu3" alt="Десерты" loading="lazy">
       </button>
       <button class="gallery__item gallery__item--half ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/10700956/2a0000018cbc8093d40d2c330207f4bbe358/XXXL" data-cap="Детали меню" data-alt="Детали меню" data-ph-label="Фото деталей">
-        <img data-img="menu4" src="" alt="Детали меню" loading="lazy">
+        <img data-img="menu4" alt="Детали меню" loading="lazy">
       </button>
     </div>
   </div>
@@ -514,7 +514,7 @@ MENU = """<section class="page-hero">
 # МАСТЕР-КЛАССЫ
 # =====================================================================
 MASTER = """<section class="page-hero">
-  <div class="page-hero__bg" data-bg-photo aria-hidden="true" data-ph-label="Фото мастер-класса"><img data-img="master1" src="" alt="Мастер-класс в «Счастье есть»" ></div>
+  <div class="page-hero__bg" data-bg-photo aria-hidden="true" data-ph-label="Фото мастер-класса"><img data-img="master1" alt="Мастер-класс в «Счастье есть»" ></div>
   <div class="page-hero__inner container">
     <div class="breadcrumbs"><a href="index.html">Главная</a><span>/</span><span>Мастер-классы</span></div>
     <span class="eyebrow">Своими руками</span>
@@ -580,25 +580,25 @@ MASTER = """<section class="page-hero">
     </div>
     <div class="gallery">
       <button class="gallery__item gallery__item--wide ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/11203687/2a000001928aa901c504a27dda58db9872b2/XXXL" data-cap="Мастер-класс" data-alt="Мастер-класс" data-ph-label="Фото мастер-класса">
-        <img data-img="master1" src="" alt="Мастер-класс" loading="lazy">
+        <img data-img="master1" alt="Мастер-класс" loading="lazy">
       </button>
       <button class="gallery__item gallery__item--narrow ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/11356085/2a000001928aa901cc3db3f92f046716b653/XXXL" data-cap="Участники за работой" data-alt="Участники" data-ph-label="Фото участников">
-        <img data-img="master2" src="" alt="Участники" loading="lazy">
+        <img data-img="master2" alt="Участники" loading="lazy">
       </button>
       <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/14091921/2a000001928aa9079589c77cf430107fac5e/XXXL" data-cap="Готовые работы" data-alt="Готовые работы" data-ph-label="Фото работ">
-        <img data-img="master3" src="" alt="Готовые работы" loading="lazy">
+        <img data-img="master3" alt="Готовые работы" loading="lazy">
       </button>
       <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/13474366/2a000001928aa9015971c1ac59465d0e805c/XXXL" data-cap="Материалы и стол" data-alt="Материалы" data-ph-label="Фото материалов">
-        <img data-img="master4" src="" alt="Материалы" loading="lazy">
+        <img data-img="master4" alt="Материалы" loading="lazy">
       </button>
       <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/13790728/2a000001928aa901f60545791c9985568b71/XXXL" data-cap="Атмосфера занятия" data-alt="Атмосфера" data-ph-label="Фото занятия">
-        <img data-img="master5" src="" alt="Атмосфера занятия" loading="lazy">
+        <img data-img="master5" alt="Атмосфера занятия" loading="lazy">
       </button>
       <button class="gallery__item gallery__item--half ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/14097168/2a000001928aa901e042589b6492bb005179/XXXL" data-cap="Финальный стол" data-alt="Финальный стол" data-ph-label="Фото стола">
-        <img data-img="master6" src="" alt="Финальный стол" loading="lazy">
+        <img data-img="master6" alt="Финальный стол" loading="lazy">
       </button>
       <div class="gallery__item gallery__item--half ph" style="cursor:default" data-ph-label="Фото зала">
-        <img data-img="guests3" src="" alt="Зал для мастер-классов" loading="lazy">
+        <img data-img="guests3" alt="Зал для мастер-классов" loading="lazy">
       </div>
     </div>
   </div>
@@ -618,7 +618,7 @@ MASTER = """<section class="page-hero">
         </div>
       </div>
       <div class="reveal reveal--d1">
-        <div class="media media--ratio-3-2 ph" data-ph-label="Фото занятия"><img data-img="master2" src="" alt="Занятие по керамике" loading="lazy"><span class="media__cap">Группы до 15 человек — комфортно и детям, и взрослым</span></div>
+        <div class="media media--ratio-3-2 ph" data-ph-label="Фото занятия"><img data-img="master2" alt="Занятие по керамике" loading="lazy"><span class="media__cap">Группы до 15 человек — комфортно и детям, и взрослым</span></div>
         <div class="grid grid--2" style="margin-top:14px;gap:14px">
           <div class="card card--flat" style="padding:20px"><b>Что включено</b><p class="small mb-0" style="color:var(--ink-soft)">Материалы, инструменты, фартук, ведущий, чай и выпечка</p></div>
           <div class="card card--flat" style="padding:20px"><b>Сколько длится</b><p class="small mb-0" style="color:var(--ink-soft)">1,5–2 часа, для групп до 15 человек</p></div>
@@ -669,7 +669,7 @@ MASTER = """<section class="page-hero">
         </div>
       </div>
       <div class="reveal reveal--d1">
-        <div class="media media--ratio-4-3 ph" data-ph-label="Фото мастер-класса"><img data-img="master4" src="" alt="Материалы для мастер-класса" loading="lazy"></div>
+        <div class="media media--ratio-4-3 ph" data-ph-label="Фото мастер-класса"><img data-img="master4" alt="Материалы для мастер-класса" loading="lazy"></div>
         <div class="card card--flat" style="margin-top:14px;padding:22px">
           <b>Группы и индивидуально</b>
           <p class="small mb-0" style="color:var(--ink-soft)">Проводим занятия для групп от 4 человек и индивидуально. Для компаний — счёт и договор. Свободные даты уточняйте по телефону.</p>
@@ -684,7 +684,7 @@ MASTER = """<section class="page-hero">
 # МЕРОПРИЯТИЯ
 # =====================================================================
 EVENTS = """<section class="page-hero">
-  <div class="page-hero__bg" data-bg-photo aria-hidden="true" data-ph-label="Фото мероприятия"><img data-img="event1" src="" alt="Мероприятие в «Счастье есть»" ></div>
+  <div class="page-hero__bg" data-bg-photo aria-hidden="true" data-ph-label="Фото мероприятия"><img data-img="event1" alt="Мероприятие в «Счастье есть»" ></div>
   <div class="page-hero__inner container">
     <div class="breadcrumbs"><a href="index.html">Главная</a><span>/</span><span>Мероприятия</span></div>
     <span class="eyebrow">Праздники под ключ</span>
@@ -720,19 +720,19 @@ EVENTS = """<section class="page-hero">
     </div>
     <div class="gallery">
       <button class="gallery__item gallery__item--half ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/13797017/2a000001928aa9731bf200ae689d02706328/XXXL" data-cap="Оформление зала" data-alt="Оформление зала" data-ph-label="Фото мероприятия">
-        <img data-img="event1" src="" alt="Оформление зала" loading="lazy">
+        <img data-img="event1" alt="Оформление зала" loading="lazy">
       </button>
       <button class="gallery__item gallery__item--half ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/13906970/2a000001928aa97570eb0a712b428bdd0abe/XXXL" data-cap="Праздничный стол" data-alt="Праздничный стол" data-ph-label="Фото стола">
-        <img data-img="event2" src="" alt="Праздничный стол" loading="lazy">
+        <img data-img="event2" alt="Праздничный стол" loading="lazy">
       </button>
       <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/14238289/2a000001928aa972cfdd2f63588ead45a07f/XXXL" data-cap="Гости праздника" data-alt="Гости" data-ph-label="Фото гостей">
-        <img data-img="event3" src="" alt="Гости праздника" loading="lazy">
+        <img data-img="event3" alt="Гости праздника" loading="lazy">
       </button>
       <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/14165812/2a000001928aa97926cdd1890b2f0569f792/XXXL" data-cap="Детали декора" data-alt="Декор" data-ph-label="Фото декора">
-        <img data-img="event4" src="" alt="Детали декора" loading="lazy">
+        <img data-img="event4" alt="Детали декора" loading="lazy">
       </button>
       <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/13929277/2a000001928aa973675fde3c29be02f92635/XXXL" data-cap="Атмосфера вечера" data-alt="Атмосфера" data-ph-label="Фото вечера">
-        <img data-img="event5" src="" alt="Атмосфера вечера" loading="lazy">
+        <img data-img="event5" alt="Атмосфера вечера" loading="lazy">
       </button>
     </div>
   </div>
@@ -839,7 +839,7 @@ EVENTS = """<section class="page-hero">
         </div>
       </div>
       <div class="reveal reveal--d1">
-        <div class="media media--ratio-4-3 ph" data-ph-label="Фото мероприятия"><img data-img="event2" src="" alt="Праздничный стол" loading="lazy"></div>
+        <div class="media media--ratio-4-3 ph" data-ph-label="Фото мероприятия"><img data-img="event2" alt="Праздничный стол" loading="lazy"></div>
       </div>
     </div>
   </div>
@@ -850,7 +850,7 @@ EVENTS = """<section class="page-hero">
 # ГАЛЕРЕЯ
 # =====================================================================
 GALLERY = """<section class="page-hero">
-  <div class="page-hero__bg" data-bg-photo aria-hidden="true" data-ph-label="Фото зала"><img data-img="guests1" src="" alt="Галерея «Счастье есть»" ></div>
+  <div class="page-hero__bg" data-bg-photo aria-hidden="true" data-ph-label="Фото зала"><img data-img="guests1" alt="Галерея «Счастье есть»" ></div>
   <div class="page-hero__inner container">
     <div class="breadcrumbs"><a href="index.html">Главная</a><span>/</span><span>Галерея</span></div>
     <span class="eyebrow">Фотографии</span>
@@ -866,11 +866,11 @@ GALLERY = """<section class="page-hero">
       <h2>Пространство и витрина</h2>
     </div>
     <div class="gallery">
-      <button class="gallery__item gallery__item--wide ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/11018317/2a0000018cbc80be39818072da4bc6a2886a/XXXL" data-cap="Зал" data-alt="Зал" data-ph-label="Фото зала"><img data-img="menu1" src="" alt="Зал" loading="lazy"></button>
-      <button class="gallery__item gallery__item--narrow ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/6382111/2a0000018cbc809395ac079d1d286f434f9d/XXXL" data-cap="Витрина" data-alt="Витрина" data-ph-label="Фото витрины"><img data-img="menu2" src="" alt="Витрина" loading="lazy"></button>
-      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/892711/2a0000018cbc8093d9b247cebbd7f2950d66/XXXL" data-cap="Детали" data-alt="Детали" data-ph-label="Фото деталей"><img data-img="menu3" src="" alt="Детали" loading="lazy"></button>
-      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/10700956/2a0000018cbc8093d40d2c330207f4bbe358/XXXL" data-cap="Витрина и меню" data-alt="Витрина и меню" data-ph-label="Фото меню"><img data-img="menu4" src="" alt="Витрина и меню" loading="lazy"></button>
-      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/10766931/2a0000019247a50d1c09f97fce652e8803a3/XXXL" data-cap="Главный вход" data-alt="Главный вход" data-ph-label="Фото входа"><img data-img="entrance" src="" alt="Главный вход" loading="lazy"></button>
+      <button class="gallery__item gallery__item--wide ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/11018317/2a0000018cbc80be39818072da4bc6a2886a/XXXL" data-cap="Зал" data-alt="Зал" data-ph-label="Фото зала"><img data-img="menu1" alt="Зал" loading="lazy"></button>
+      <button class="gallery__item gallery__item--narrow ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/6382111/2a0000018cbc809395ac079d1d286f434f9d/XXXL" data-cap="Витрина" data-alt="Витрина" data-ph-label="Фото витрины"><img data-img="menu2" alt="Витрина" loading="lazy"></button>
+      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/892711/2a0000018cbc8093d9b247cebbd7f2950d66/XXXL" data-cap="Детали" data-alt="Детали" data-ph-label="Фото деталей"><img data-img="menu3" alt="Детали" loading="lazy"></button>
+      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/10700956/2a0000018cbc8093d40d2c330207f4bbe358/XXXL" data-cap="Витрина и меню" data-alt="Витрина и меню" data-ph-label="Фото меню"><img data-img="menu4" alt="Витрина и меню" loading="lazy"></button>
+      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/10766931/2a0000019247a50d1c09f97fce652e8803a3/XXXL" data-cap="Главный вход" data-alt="Главный вход" data-ph-label="Фото входа"><img data-img="entrance" alt="Главный вход" loading="lazy"></button>
     </div>
   </div>
 </section>
@@ -879,11 +879,11 @@ GALLERY = """<section class="page-hero">
   <div class="container">
     <div class="section-head reveal"><span class="eyebrow">Гости</span><h2>Атмосфера и люди</h2></div>
     <div class="gallery">
-      <button class="gallery__item gallery__item--half ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/10700095/2a0000018cbc87ef060ef9ce3eedd668a49d/XXXL" data-cap="Гости заведения" data-alt="Гости" data-ph-label="Фото гостей"><img data-img="guests1" src="" alt="Гости" loading="lazy"></button>
-      <button class="gallery__item gallery__item--half ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/10700095/2a0000018cbc8054b0aed411cbfdf2f5da2d/XXXL" data-cap="В зале" data-alt="В зале" data-ph-label="Фото зала"><img data-img="guests2" src="" alt="В зале" loading="lazy"></button>
-      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/11187599/2a0000018cbc880da6775a3d6696ca81a4b8/XXXL" data-cap="Встречи за столом" data-alt="Встречи" data-ph-label="Фото встречи"><img data-img="guests3" src="" alt="Встречи за столом" loading="lazy"></button>
-      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/13072111/2a0000018ef00b7746b0e63985d978d0b426/XXXL" data-cap="Компания" data-alt="Компания" data-ph-label="Фото компании"><img data-img="guests4" src="" alt="Компания" loading="lazy"></button>
-      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/10647561/2a0000018d36aa786e95dd0dafc0b3efed74/XXXL" data-cap="Гости" data-alt="Гости" data-ph-label="Фото гостей"><img data-img="guests5" src="" alt="Гости" loading="lazy"></button>
+      <button class="gallery__item gallery__item--half ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/10700095/2a0000018cbc87ef060ef9ce3eedd668a49d/XXXL" data-cap="Гости заведения" data-alt="Гости" data-ph-label="Фото гостей"><img data-img="guests1" alt="Гости" loading="lazy"></button>
+      <button class="gallery__item gallery__item--half ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/10700095/2a0000018cbc8054b0aed411cbfdf2f5da2d/XXXL" data-cap="В зале" data-alt="В зале" data-ph-label="Фото зала"><img data-img="guests2" alt="В зале" loading="lazy"></button>
+      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/11187599/2a0000018cbc880da6775a3d6696ca81a4b8/XXXL" data-cap="Встречи за столом" data-alt="Встречи" data-ph-label="Фото встречи"><img data-img="guests3" alt="Встречи за столом" loading="lazy"></button>
+      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/13072111/2a0000018ef00b7746b0e63985d978d0b426/XXXL" data-cap="Компания" data-alt="Компания" data-ph-label="Фото компании"><img data-img="guests4" alt="Компания" loading="lazy"></button>
+      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/10647561/2a0000018d36aa786e95dd0dafc0b3efed74/XXXL" data-cap="Гости" data-alt="Гости" data-ph-label="Фото гостей"><img data-img="guests5" alt="Гости" loading="lazy"></button>
     </div>
   </div>
 </section>
@@ -892,9 +892,9 @@ GALLERY = """<section class="page-hero">
   <div class="container">
     <div class="section-head reveal"><span class="eyebrow">Мастер-классы</span><h2>Занятия и работы</h2><p class="lead">Полностью — на <a href="master-classes.html">странице мастер-классов</a>.</p></div>
     <div class="gallery">
-      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/11203687/2a000001928aa901c504a27dda58db9872b2/XXXL" data-cap="Мастер-класс" data-alt="Мастер-класс" data-ph-label="Фото мастер-класса"><img data-img="master1" src="" alt="Мастер-класс" loading="lazy"></button>
-      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/11356085/2a000001928aa901cc3db3f92f046716b653/XXXL" data-cap="Участники" data-alt="Участники" data-ph-label="Фото участников"><img data-img="master2" src="" alt="Участники" loading="lazy"></button>
-      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/14091921/2a000001928aa9079589c77cf430107fac5e/XXXL" data-cap="Готовые работы" data-alt="Работы" data-ph-label="Фото работ"><img data-img="master3" src="" alt="Готовые работы" loading="lazy"></button>
+      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/11203687/2a000001928aa901c504a27dda58db9872b2/XXXL" data-cap="Мастер-класс" data-alt="Мастер-класс" data-ph-label="Фото мастер-класса"><img data-img="master1" alt="Мастер-класс" loading="lazy"></button>
+      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/11356085/2a000001928aa901cc3db3f92f046716b653/XXXL" data-cap="Участники" data-alt="Участники" data-ph-label="Фото участников"><img data-img="master2" alt="Участники" loading="lazy"></button>
+      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/14091921/2a000001928aa9079589c77cf430107fac5e/XXXL" data-cap="Готовые работы" data-alt="Работы" data-ph-label="Фото работ"><img data-img="master3" alt="Готовые работы" loading="lazy"></button>
     </div>
   </div>
 </section>
@@ -903,9 +903,9 @@ GALLERY = """<section class="page-hero">
   <div class="container">
     <div class="section-head reveal"><span class="eyebrow">Мероприятия</span><h2>Праздники</h2><p class="lead">Полностью — на <a href="events.html">странице мероприятий</a>.</p></div>
     <div class="gallery">
-      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/13797017/2a000001928aa9731bf200ae689d02706328/XXXL" data-cap="Оформление" data-alt="Оформление" data-ph-label="Фото оформления"><img data-img="event1" src="" alt="Оформление" loading="lazy"></button>
-      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/13906970/2a000001928aa97570eb0a712b428bdd0abe/XXXL" data-cap="Стол" data-alt="Стол" data-ph-label="Фото стола"><img data-img="event2" src="" alt="Стол" loading="lazy"></button>
-      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/14238289/2a000001928aa972cfdd2f63588ead45a07f/XXXL" data-cap="Гости" data-alt="Гости" data-ph-label="Фото гостей"><img data-img="event3" src="" alt="Гости" loading="lazy"></button>
+      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/13797017/2a000001928aa9731bf200ae689d02706328/XXXL" data-cap="Оформление" data-alt="Оформление" data-ph-label="Фото оформления"><img data-img="event1" alt="Оформление" loading="lazy"></button>
+      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/13906970/2a000001928aa97570eb0a712b428bdd0abe/XXXL" data-cap="Стол" data-alt="Стол" data-ph-label="Фото стола"><img data-img="event2" alt="Стол" loading="lazy"></button>
+      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/14238289/2a000001928aa972cfdd2f63588ead45a07f/XXXL" data-cap="Гости" data-alt="Гости" data-ph-label="Фото гостей"><img data-img="event3" alt="Гости" loading="lazy"></button>
     </div>
   </div>
 </section>
@@ -915,7 +915,7 @@ GALLERY = """<section class="page-hero">
 # КОНТАКТЫ
 # =====================================================================
 CONTACTS = """<section class="page-hero">
-  <div class="page-hero__bg" data-bg-photo aria-hidden="true" data-ph-label="Фото входа"><img data-img="entrance" src="" alt="Вход в «Счастье есть»" ></div>
+  <div class="page-hero__bg" data-bg-photo aria-hidden="true" data-ph-label="Фото входа"><img data-img="entrance" alt="Вход в «Счастье есть»" ></div>
   <div class="page-hero__inner container">
     <div class="breadcrumbs"><a href="index.html">Главная</a><span>/</span><span>Контакты</span></div>
     <span class="eyebrow">Как нас найти</span>
@@ -982,7 +982,7 @@ CONTACTS = """<section class="page-hero">
 
       <div class="reveal reveal--d1">
         <div class="media media--ratio-4-3 ph" data-ph-label="Фото главного входа">
-          <img data-img="entrance" src="" alt="Главный вход в «Счастье есть»" loading="lazy">
+          <img data-img="entrance" alt="Главный вход в «Счастье есть»" loading="lazy">
           <span class="media__cap">Вход с улицы 1905 года — ищите вывеску</span>
         </div>
 
@@ -1057,7 +1057,7 @@ CONTACTS = """<section class="page-hero">
 # БРОНИРОВАНИЕ
 # =====================================================================
 BOOKING = """<section class="page-hero">
-  <div class="page-hero__bg" data-bg-photo aria-hidden="true" data-ph-label="Фото зала"><img data-img="guests2" src="" alt="Заявка в «Счастье есть»" ></div>
+  <div class="page-hero__bg" data-bg-photo aria-hidden="true" data-ph-label="Фото зала"><img data-img="guests2" alt="Заявка в «Счастье есть»" ></div>
   <div class="page-hero__inner container">
     <div class="breadcrumbs"><a href="index.html">Главная</a><span>/</span><span>Заявка</span></div>
     <span class="eyebrow">Бронирование</span>
@@ -1076,7 +1076,7 @@ BOOKING = """<section class="page-hero">
           <div class="contact-row"><div class="contact-row__icon">📞</div><div><div class="contact-row__value">Хотите быстрее — позвоните</div><div class="contact-row__extra"><a data-phone data-phone-text href="tel:+79163526995">+7 (916) 352-69-95</a></div></div></div>
         </div>
 
-        <div class="media media--ratio-16-9 ph" style="margin-top:24px" data-ph-label="Фото зала"><img data-img="event1" src="" alt="Зал «Счастье есть»" loading="lazy"></div>
+        <div class="media media--ratio-16-9 ph" style="margin-top:24px" data-ph-label="Фото зала"><img data-img="event1" alt="Зал «Счастье есть»" loading="lazy"></div>
 
         <div class="grid grid--2" style="margin-top:18px">
           <div class="card card--flat"><h3 style="font-size:1.15rem">Если праздник завтра</h3><p class="small mb-0" style="color:var(--ink-soft)">Позвоните — иногда получается организовать всё за день. Скажите «срочно».</p></div>

@@ -28,7 +28,7 @@ WELCOME = """<!-- ПРИВЕТСТВЕННАЯ АНИМАЦИЯ -->
   <span class="welcome__ripple"></span>
   <span class="welcome__ripple"></span>
   <div class="welcome__inner">
-    <div class="welcome__mark"><img data-img="entrance" src="assets/img/logo-green.png" alt="«Счастье есть»"></div>
+    <div class="welcome__mark"><img data-fixed-src src="assets/img/logo-green.png" alt="«Счастье есть»"></div>
     <div class="welcome__title"><span>Счастье</span> <span>есть</span></div>
     <p class="welcome__sub">Кофейня · лофт · мастер-классы</p>
     <div class="welcome__bar"><i></i></div>
@@ -186,7 +186,7 @@ INDEX = """<section class="hero" id="top">
         <div class="fact"><div class="fact__value">5,0</div><div class="fact__label">Яндекс · 2ГИС</div></div>
         <div class="fact"><div class="fact__value">09–21</div><div class="fact__label">Каждый день</div></div>
         <div class="fact"><div class="fact__value fact__value--sm">ул. 1905 года, 2</div><div class="fact__label">Орехово-Зуево, 1 этаж</div></div>
-        <div class="fact"><div class="fact__value">21</div><div class="fact__label">фотография в галерее</div></div>
+        <div class="fact"><div class="fact__value">17</div><div class="fact__label">фотографий в галерее</div></div>
       </div>
       <span class="eyebrow" style="color:var(--terracotta-soft)">Лофт-пространство и кофейня</span>
       <h1>Место, где <em>правда</em> есть счастье</h1>
@@ -869,11 +869,12 @@ GALLERY = """<section class="page-hero">
       <h2>Пространство и витрина</h2>
     </div>
     <div class="gallery">
-      <button class="gallery__item gallery__item--wide ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/11018317/2a0000018cbc80be39818072da4bc6a2886a/XXXL" data-cap="Зал" data-alt="Зал" data-ph-label="Фото зала"><img data-img="menu1" alt="Зал" loading="lazy"></button>
-      <button class="gallery__item gallery__item--narrow ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/6382111/2a0000018cbc809395ac079d1d286f434f9d/XXXL" data-cap="Витрина" data-alt="Витрина" data-ph-label="Фото витрины"><img data-img="menu2" alt="Витрина" loading="lazy"></button>
-      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/892711/2a0000018cbc8093d9b247cebbd7f2950d66/XXXL" data-cap="Детали" data-alt="Детали" data-ph-label="Фото деталей"><img data-img="menu3" alt="Детали" loading="lazy"></button>
-      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/10700956/2a0000018cbc8093d40d2c330207f4bbe358/XXXL" data-cap="Витрина и меню" data-alt="Витрина и меню" data-ph-label="Фото меню"><img data-img="menu4" alt="Витрина и меню" loading="lazy"></button>
-      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/10766931/2a0000019247a50d1c09f97fce652e8803a3/XXXL" data-cap="Главный вход" data-alt="Главный вход" data-ph-label="Фото входа"><img data-img="entrance" alt="Главный вход" loading="lazy"></button>
+      <button class="gallery__item gallery__item--wide ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/8093564/2a00000186d215c72c82d0d1c153dad491ee/XXXL" data-cap="Зал" data-alt="Зал" data-ph-label="Фото: зал"><img data-img="hallA" alt="Зал" loading="lazy"></button>
+      <button class="gallery__item gallery__item--narrow ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/13451497/2a0000018eecde2309ef92d4cbf34e258ff0/XXXL" data-cap="Витрина" data-alt="Витрина" data-ph-label="Фото: витрина"><img data-img="hallB" alt="Витрина" loading="lazy"></button>
+      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/7810332/2a00000186d2167c250ca86be35a7e82680b/XXXL" data-cap="Детали" data-alt="Детали" data-ph-label="Фото: детали"><img data-img="hallC" alt="Детали" loading="lazy"></button>
+      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/927916/2a00000186d1925111b9a86a43eec766bb08/XXXL" data-cap="Витрина и меню" data-alt="Витрина и меню" data-ph-label="Фото: витрина и меню"><img data-img="hallD" alt="Витрина и меню" loading="lazy"></button>
+      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/758053/2a00000186d19255cfa6ee36398fb9f5ffc4/XXXL" data-cap="Главный вход" data-alt="Главный вход" data-ph-label="Фото: главный вход"><img data-img="hallE" alt="Главный вход" loading="lazy"></button>
+      <button class="gallery__item gallery__item--third ph" data-lightbox="https://avatars.mds.yandex.net/get-altay/14010724/2a000001939cc8d7aae793017bd0b22b1f94/XXXL" data-cap="Пространство" data-alt="Пространство" data-ph-label="Фото: пространство"><img data-img="hallF" alt="Пространство" loading="lazy"></button>
     </div>
   </div>
 </section>
@@ -1202,7 +1203,7 @@ if __name__ == "__main__":
          "events.html", EVENTS)
     page("gallery.html",
          "Галерея — зал, гости, мастер-классы и праздники · «Счастье есть»",
-         "21 фотография лофт-пространства «Счастье есть» в Орехово-Зуево: зал и витрина, гости, мастер-классы, оформление праздников и главный вход.",
+         "17 фотографий лофт-пространства «Счастье есть» в Орехово-Зуево: зал и витрина, гости, мастер-классы, оформление праздников и главный вход.",
          "gallery.html", GALLERY)
     page("contacts.html",
          "Контакты и адрес · «Счастье есть», Орехово-Зуево",

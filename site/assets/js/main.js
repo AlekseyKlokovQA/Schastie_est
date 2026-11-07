@@ -20,6 +20,12 @@
   var FALLBACK = {
     photos: {
       welcome: 'https://avatars.mds.yandex.net/get-altay/10700095/2a0000018cbc87ef060ef9ce3eedd668a49d/XXXL',
+      hallA: 'https://avatars.mds.yandex.net/get-altay/8093564/2a00000186d215c72c82d0d1c153dad491ee/XXXL',
+      hallB: 'https://avatars.mds.yandex.net/get-altay/13451497/2a0000018eecde2309ef92d4cbf34e258ff0/XXXL',
+      hallC: 'https://avatars.mds.yandex.net/get-altay/7810332/2a00000186d2167c250ca86be35a7e82680b/XXXL',
+      hallD: 'https://avatars.mds.yandex.net/get-altay/927916/2a00000186d1925111b9a86a43eec766bb08/XXXL',
+      hallE: 'https://avatars.mds.yandex.net/get-altay/758053/2a00000186d19255cfa6ee36398fb9f5ffc4/XXXL',
+      hallF: 'https://avatars.mds.yandex.net/get-altay/14010724/2a000001939cc8d7aae793017bd0b22b1f94/XXXL',
       entrance: 'https://avatars.mds.yandex.net/get-altay/10766931/2a0000019247a50d1c09f97fce652e8803a3/XXXL',
       hall: 'https://avatars.mds.yandex.net/get-altay/11018317/2a0000018cbc80be39818072da4bc6a2886a/XXXL',
       hall2: 'https://avatars.mds.yandex.net/get-altay/6382111/2a0000018cbc809395ac079d1d286f434f9d/XXXL',
@@ -64,6 +70,10 @@
   /* ---------------- Контент: фото и акции ---------------- */
   function applyPhotos(photos) {
     $$('[data-img]').forEach(function (img) {
+      /* логотип заставки: у него есть data-img как «маячок» слота, но
+         подменять src нельзя — иначе вместо логотипа появится фото входа.
+         У таких картинок уже задан собственный src. */
+      if (img.hasAttribute('data-fixed-src')) return;
       var key = img.getAttribute('data-img');
       if (!(key in photos)) return;
       var url = photos[key];

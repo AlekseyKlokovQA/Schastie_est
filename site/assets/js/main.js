@@ -19,6 +19,7 @@
      не сохранены), сайт всё равно показывает фото и акции. */
   var FALLBACK = {
     photos: {
+      welcome: 'https://avatars.mds.yandex.net/get-altay/10700095/2a0000018cbc87ef060ef9ce3eedd668a49d/XXXL',
       entrance: 'https://avatars.mds.yandex.net/get-altay/10766931/2a0000019247a50d1c09f97fce652e8803a3/XXXL',
       hall: 'https://avatars.mds.yandex.net/get-altay/11018317/2a0000018cbc80be39818072da4bc6a2886a/XXXL',
       hall2: 'https://avatars.mds.yandex.net/get-altay/6382111/2a0000018cbc809395ac079d1d286f434f9d/XXXL',

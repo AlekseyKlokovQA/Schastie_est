@@ -499,12 +499,42 @@ body.nav-open .burger span::after { transform: translateY(-6px) rotate(-45deg); 
 .reveal--d3 { transition-delay: .24s; }
 
 /* ---------------- Приветственная анимация ---------------- */
+/* Заставка: фото на весь экран + затемнение, поверх — логотип и заголовок */
 .welcome {
   position: fixed; inset: 0; z-index: 300; display: grid; place-items: center;
-  background: var(--cream); color: var(--ink); overflow: hidden;
+  background: var(--ink); color: var(--cream); overflow: hidden;
   transition: opacity .8s var(--ease), visibility .8s;
 }
 .welcome.is-closing { opacity: 0; visibility: hidden; }
+
+/* фон-фото: занимает весь экран, не искажается */
+.welcome__bg {
+  position: absolute !important; inset: 0; z-index: 0;
+  overflow: hidden; pointer-events: none;
+}
+.welcome__bg img {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  min-width: 100%; min-height: 100%;
+  max-width: none; max-height: none;
+  object-fit: cover; object-position: center 40%;
+  display: block; border: 0;
+  /* лёгкий «наезд» камеры во время показа заставки */
+  animation: welcomeZoom 3.6s var(--ease) both;
+}
+@keyframes welcomeZoom {
+  from { transform: scale(1.08); }
+  to   { transform: scale(1); }
+}
+.welcome__bg img:not([src]) { opacity: 0; }
+
+/* затемнение поверх фото, чтобы белый текст читался на любом снимке */
+.welcome__bg::after {
+  content: ""; position: absolute; inset: 0; z-index: 2;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(20, 14, 10, .28) 0%, rgba(20, 14, 10, .62) 100%),
+    linear-gradient(180deg, rgba(20, 14, 10, .45) 0%, rgba(20, 14, 10, .3) 45%, rgba(20, 14, 10, .7) 100%);
+}
 .welcome__ripple {
   position: absolute; left: 50%; top: 50%; width: 46vmax; height: 46vmax;
   border-radius: 50%; transform: translate(-50%, -50%) scale(.2); opacity: 0;
@@ -517,37 +547,48 @@ body.nav-open .burger span::after { transform: translateY(-6px) rotate(-45deg); 
   30% { opacity: .85; }
   100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
 }
-.welcome__inner { position: relative; z-index: 2; text-align: center; padding: 24px; }
+.welcome__inner { position: relative; z-index: 3; text-align: center; padding: 24px; }
+.welcome__inner::before {
+  /* мягкая подложка под текстом: помогает на светлых участках снимка */
+  content: ""; position: absolute; inset: -8% -12%; z-index: -1;
+  background: radial-gradient(ellipse at center, rgba(20, 14, 10, .55) 0%, rgba(20, 14, 10, 0) 70%);
+  pointer-events: none;
+}
 .welcome__mark img {
   width: 112px; height: 112px; border-radius: 0; margin: 0 auto 22px;
   object-fit: contain;
-  filter: drop-shadow(0 16px 30px rgba(51, 39, 31, .22));
+  filter: drop-shadow(0 10px 26px rgba(0, 0, 0, .55));
   animation: markIn 1s var(--ease) both;
 }
 @keyframes markIn { from { opacity: 0; transform: scale(.7) translateY(14px); } to { opacity: 1; transform: none; } }
 .welcome__title {
   font-family: var(--font-display); font-size: clamp(2.6rem, 7vw, 4.6rem);
   line-height: 1; font-weight: 600; letter-spacing: -.02em;
+  color: var(--cream);
+  text-shadow: 0 3px 30px rgba(0, 0, 0, .55);
 }
 .welcome__title span { display: inline-block; opacity: 0; animation: wordIn .85s var(--ease) both; }
 .welcome__title span:nth-child(1) { animation-delay: .28s; }
-.welcome__title span:nth-child(2) { animation-delay: .46s; font-style: italic; color: var(--terracotta); }
+.welcome__title span:nth-child(2) { animation-delay: .46s; font-style: italic; color: var(--terracotta-soft); }
 @keyframes wordIn { from { opacity: 0; transform: translateY(26px) rotate(2deg); } to { opacity: 1; transform: none; } }
 .welcome__sub {
   margin: 14px 0 26px; font-size: .78rem; letter-spacing: .3em; text-transform: uppercase;
-  color: var(--ink-mute); opacity: 0; animation: fadeIn .8s var(--ease) .8s both;
+  color: rgba(251, 246, 239, .82);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, .6);
+  opacity: 0; animation: fadeIn .8s var(--ease) .8s both;
 }
 @keyframes fadeIn { to { opacity: 1; } }
-.welcome__bar { width: 168px; height: 2px; background: var(--sand); margin: 0 auto; border-radius: 2px; overflow: hidden; }
-.welcome__bar i { display: block; height: 100%; width: 0; background: var(--terracotta); animation: barIn 2.1s var(--ease) .2s forwards; }
+.welcome__bar { width: 168px; height: 2px; background: rgba(251, 246, 239, .3); margin: 0 auto; border-radius: 2px; overflow: hidden; }
+.welcome__bar i { display: block; height: 100%; width: 0; background: var(--terracotta-soft); animation: barIn 2.1s var(--ease) .2s forwards; }
 @keyframes barIn { to { width: 100%; } }
 .welcome__skip {
   position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
-  background: transparent; border: 1px solid var(--line); border-radius: var(--radius-pill);
+  background: rgba(20, 14, 10, .35); border: 1px solid rgba(251, 246, 239, .4);
+  border-radius: var(--radius-pill); backdrop-filter: blur(6px);
   padding: 9px 20px; font-family: var(--font-body); font-size: .78rem; font-weight: 600;
-  color: var(--ink-mute); cursor: pointer; transition: color .2s, border-color .2s;
+  color: rgba(251, 246, 239, .9); cursor: pointer; transition: color .2s, border-color .2s, background .2s;
 }
-.welcome__skip:hover { color: var(--ink); border-color: rgba(51, 39, 31, .3); }
+.welcome__skip:hover { color: #fff; border-color: rgba(251, 246, 239, .8); background: rgba(20, 14, 10, .55); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }

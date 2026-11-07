@@ -309,7 +309,8 @@
   var state = { content: { photos: {}, promos: [] }, leads: [], tab: 'dashboard' };
 
   var PHOTO_FIELDS = [
-    { key: 'entrance', label: 'Главный вход', hint: 'Обложка главной, страницы контактов и первый экран заставки' },
+    { key: 'welcome', label: 'Заставка (вход)', hint: 'Полноэкранное фото при загрузке сайта' },
+    { key: 'entrance', label: 'Главный вход', hint: 'Обложка главной и страница контактов' },
     { key: 'guests1', label: 'Гости заведения', hint: 'Первый экран главной и блок «Галерея»' },
     { key: 'guests2', label: 'В зале', hint: 'Блок «О нас» и страница заявки' },
     { key: 'guests3', label: 'Встречи за столом', hint: 'Галерея, «Гости»' },
@@ -333,6 +334,7 @@
   ];
 
   var YANDEX_DEFAULTS = {
+    welcome: 'https://avatars.mds.yandex.net/get-altay/10700095/2a0000018cbc87ef060ef9ce3eedd668a49d/XXXL',
     entrance: 'https://avatars.mds.yandex.net/get-altay/10766931/2a0000019247a50d1c09f97fce652e8803a3/XXXL',
     guests1: 'https://avatars.mds.yandex.net/get-altay/10700095/2a0000018cbc87ef060ef9ce3eedd668a49d/XXXL',
     guests2: 'https://avatars.mds.yandex.net/get-altay/10700095/2a0000018cbc8054b0aed411cbfdf2f5da2d/XXXL',

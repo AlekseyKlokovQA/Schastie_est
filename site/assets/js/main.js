@@ -165,6 +165,9 @@
     }
 
     var timer = setTimeout(finish, 2700);
+    /* аварийный таймер: если что-то помешало finish(), заставка всё равно уйдёт */
+    setTimeout(finish, 6000);
+
     var skip = $('[data-welcome-skip]');
     if (skip) skip.addEventListener('click', function () { clearTimeout(timer); finish(); });
     welcome.addEventListener('click', function (e) {
@@ -503,6 +506,15 @@
   /* ---------------- Запуск ---------------- */
   function boot() {
     initBasics();
+    /* если скрипт упал до initWelcome, заставка всё равно должна исчезнуть */
+    setTimeout(function () {
+      var stuck = $('[data-welcome]');
+      if (stuck && !stuck.classList.contains('is-closing')) {
+        stuck.classList.add('is-closing');
+        document.body.classList.remove('is-locked');
+        setTimeout(function () { if (stuck.parentNode) stuck.parentNode.removeChild(stuck); }, 900);
+      }
+    }, 8000);
     initWelcome();
     initHeader();
     loadContent();

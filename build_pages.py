@@ -176,7 +176,7 @@ def page(filename, title, desc, active, body, og="https://avatars.mds.yandex.net
 # ГЛАВНАЯ
 # =====================================================================
 INDEX = """<section class="hero" id="top">
-  <div class="hero__bg ph" data-ph-label="Фото зала «Счастье есть»"><img data-img="guests1" src="" alt="Гости в лофте «Счастье есть»" style="width:100%;height:100%;object-fit:cover"></div>
+  <div class="hero__bg" data-bg-photo aria-hidden="true" data-ph-label="Фото зала «Счастье есть»"><img data-img="guests1" src="" alt="Гости в лофте «Счастье есть»" ></div>
   <div class="hero__inner">
     <div class="container">
       <span class="eyebrow" style="color:var(--terracotta-soft)">Лофт-пространство и кофейня</span>
@@ -392,7 +392,7 @@ INDEX = """<section class="hero" id="top">
 # МЕНЮ
 # =====================================================================
 MENU = """<section class="page-hero">
-  <div class="page-hero__bg ph" data-ph-label="Фото меню"><img data-img="menu3" src="" alt="Меню кофейни «Счастье есть»" style="width:100%;height:100%;object-fit:cover"></div>
+  <div class="page-hero__bg" data-bg-photo aria-hidden="true" data-ph-label="Фото меню"><img data-img="menu3" src="" alt="Меню кофейни «Счастье есть»" ></div>
   <div class="page-hero__inner container">
     <div class="breadcrumbs"><a href="index.html">Главная</a><span>/</span><span>Меню</span></div>
     <span class="eyebrow">Кофейня</span>
@@ -514,7 +514,7 @@ MENU = """<section class="page-hero">
 # МАСТЕР-КЛАССЫ
 # =====================================================================
 MASTER = """<section class="page-hero">
-  <div class="page-hero__bg ph" data-ph-label="Фото мастер-класса"><img data-img="master1" src="" alt="Мастер-класс в «Счастье есть»" style="width:100%;height:100%;object-fit:cover"></div>
+  <div class="page-hero__bg" data-bg-photo aria-hidden="true" data-ph-label="Фото мастер-класса"><img data-img="master1" src="" alt="Мастер-класс в «Счастье есть»" ></div>
   <div class="page-hero__inner container">
     <div class="breadcrumbs"><a href="index.html">Главная</a><span>/</span><span>Мастер-классы</span></div>
     <span class="eyebrow">Своими руками</span>
@@ -684,7 +684,7 @@ MASTER = """<section class="page-hero">
 # МЕРОПРИЯТИЯ
 # =====================================================================
 EVENTS = """<section class="page-hero">
-  <div class="page-hero__bg ph" data-ph-label="Фото мероприятия"><img data-img="event1" src="" alt="Мероприятие в «Счастье есть»" style="width:100%;height:100%;object-fit:cover"></div>
+  <div class="page-hero__bg" data-bg-photo aria-hidden="true" data-ph-label="Фото мероприятия"><img data-img="event1" src="" alt="Мероприятие в «Счастье есть»" ></div>
   <div class="page-hero__inner container">
     <div class="breadcrumbs"><a href="index.html">Главная</a><span>/</span><span>Мероприятия</span></div>
     <span class="eyebrow">Праздники под ключ</span>
@@ -850,7 +850,7 @@ EVENTS = """<section class="page-hero">
 # ГАЛЕРЕЯ
 # =====================================================================
 GALLERY = """<section class="page-hero">
-  <div class="page-hero__bg ph" data-ph-label="Фото зала"><img data-img="guests1" src="" alt="Галерея «Счастье есть»" style="width:100%;height:100%;object-fit:cover"></div>
+  <div class="page-hero__bg" data-bg-photo aria-hidden="true" data-ph-label="Фото зала"><img data-img="guests1" src="" alt="Галерея «Счастье есть»" ></div>
   <div class="page-hero__inner container">
     <div class="breadcrumbs"><a href="index.html">Главная</a><span>/</span><span>Галерея</span></div>
     <span class="eyebrow">Фотографии</span>
@@ -915,7 +915,7 @@ GALLERY = """<section class="page-hero">
 # КОНТАКТЫ
 # =====================================================================
 CONTACTS = """<section class="page-hero">
-  <div class="page-hero__bg ph" data-ph-label="Фото входа"><img data-img="entrance" src="" alt="Вход в «Счастье есть»" style="width:100%;height:100%;object-fit:cover"></div>
+  <div class="page-hero__bg" data-bg-photo aria-hidden="true" data-ph-label="Фото входа"><img data-img="entrance" src="" alt="Вход в «Счастье есть»" ></div>
   <div class="page-hero__inner container">
     <div class="breadcrumbs"><a href="index.html">Главная</a><span>/</span><span>Контакты</span></div>
     <span class="eyebrow">Как нас найти</span>
@@ -1057,7 +1057,7 @@ CONTACTS = """<section class="page-hero">
 # БРОНИРОВАНИЕ
 # =====================================================================
 BOOKING = """<section class="page-hero">
-  <div class="page-hero__bg ph" data-ph-label="Фото зала"><img data-img="guests2" src="" alt="Заявка в «Счастье есть»" style="width:100%;height:100%;object-fit:cover"></div>
+  <div class="page-hero__bg" data-bg-photo aria-hidden="true" data-ph-label="Фото зала"><img data-img="guests2" src="" alt="Заявка в «Счастье есть»" ></div>
   <div class="page-hero__inner container">
     <div class="breadcrumbs"><a href="index.html">Главная</a><span>/</span><span>Заявка</span></div>
     <span class="eyebrow">Бронирование</span>

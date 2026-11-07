@@ -1,9 +1,0 @@
-services:
-  resonance-web:
-    build: .
-    container_name: resonance_club
-    restart: always
-    ports:
-      - "3000:3000"
-    environment:
-      - PYTHONUNBUFFERED=1

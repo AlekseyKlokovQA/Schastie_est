@@ -178,6 +178,13 @@ class Handler(SimpleHTTPRequestHandler):
         if path in PAGES:
             return self._file(os.path.join(SITE, PAGES[path])) or self._not_found()
 
+        # «красивые» адреса: /menu, /events/, /master-classes без .html
+        clean = path.rstrip('/')
+        if clean and not os.path.splitext(clean)[1]:
+            pretty = clean.lstrip('/') + '.html'
+            if pretty in PAGES.values():
+                return self._file(os.path.join(SITE, pretty)) or self._not_found()
+
         if path in ('/admin', '/admin/'):
             return self._file(os.path.join(ADMIN, 'index.html')) or self._not_found()
 
@@ -460,13 +467,22 @@ class Handler(SimpleHTTPRequestHandler):
         if os.path.isfile(page):
             with open(page, 'rb') as f:
                 return self._send(404, f.read(), 'text/html; charset=utf-8')
-        self._send(404, 'Страница не найдена', 'text/plain; charset=utf-8')
+        self._send(404,
+                   '<!DOCTYPE html><html lang="ru"><meta charset="utf-8">'
+                   '<title>Страница не найдена</title>'
+                   '<body style="font-family:sans-serif;padding:40px">'
+                   '<h1>Страница не найдена</h1>'
+                   '<p><a href="/">На главную сайта</a> · <a href="/admin/">Админ-панель</a></p>',
+                   'text/html; charset=utf-8')
 
 
 def main():
     ensure_dirs()
     ensure_auth()
     ensure_content()
+    index_file = os.path.join(SITE, 'index.html')
+    if not os.path.isfile(index_file):
+        print('ВНИМАНИЕ: не найден %s — соберите страницы: python3 build_pages.py' % index_file)
     if not os.path.exists(LEADS):
         write_json(LEADS, [])
     server = ThreadingHTTPServer((HOST, PORT), Handler)

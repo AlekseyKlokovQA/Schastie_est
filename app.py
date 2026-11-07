@@ -19,6 +19,7 @@ import mimetypes
 import os
 import secrets
 import shutil
+import socket
 import sys
 import threading
 from datetime import datetime
@@ -35,6 +36,8 @@ LEADS = os.path.join(DATA, 'leads.json')
 AUTH = os.path.join(DATA, 'auth.json')
 
 PORT = int(os.environ.get('PORT', '8080'))
+# Перечень портов через запятую: сервер поднимется на всех сразу.
+PORTS = [int(x) for x in os.environ.get('PORTS', str(PORT)).replace(' ', '').split(',') if x.strip().isdigit()]
 HOST = os.environ.get('HOST', '0.0.0.0')
 MAX_BODY = 8 * 1024 * 1024  # 8 МБ
 ALLOWED_UPLOAD = {'.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg', '.avif'}
@@ -106,7 +109,10 @@ class Handler(SimpleHTTPRequestHandler):
 
     # -------------------------------------------------- логирование
     def log_message(self, fmt, *args):
-        sys.stderr.write('[%s] %s\n' % (datetime.now().strftime('%H:%M:%S'), fmt % args))
+        client = self.client_address[0] if self.client_address else '-'
+        sys.stderr.write('[%s] %s  клиент=%s\n'
+                         % (datetime.now().strftime('%H:%M:%S'), fmt % args, client))
+        sys.stderr.flush()
 
     # -------------------------------------------------- helpers
     def _send(self, code, body=b'', ctype='text/plain; charset=utf-8', extra=None):
@@ -116,6 +122,11 @@ class Handler(SimpleHTTPRequestHandler):
         self.send_header('Content-Type', ctype)
         self.send_header('Content-Length', str(len(body)))
         self.send_header('Cache-Control', 'no-store' if ctype.startswith('application/json') else 'no-cache')
+        self.send_header('X-Content-Type-Options', 'nosniff')
+        # не мешаем превью-окружению встраивать сайт в iframe
+        self.send_header('Cross-Origin-Resource-Policy', 'cross-origin')
+        if ctype.startswith('application/json'):
+            self.send_header('Access-Control-Allow-Origin', '*')
         for k, v in (extra or {}).items():
             self.send_header(k, v)
         self.end_headers()
@@ -172,6 +183,10 @@ class Handler(SimpleHTTPRequestHandler):
     def do_GET(self):
         path = unquote(urlparse(self.path).path)
 
+        # диагностика: открыть в браузере, чтобы увидеть, что сервер жив
+        if path in ('/healthz', '/api/health'):
+            return self.health()
+
         if path.startswith('/api/'):
             return self.api_get(path)
 
@@ -213,6 +228,17 @@ class Handler(SimpleHTTPRequestHandler):
         if path.startswith('/api/'):
             return self.api_post(path)
         self._json(404, {'error': 'not found'})
+
+    # -------------------------------------------------- health-check
+    def health(self):
+        index_ok = os.path.isfile(os.path.join(SITE, 'index.html'))
+        return self._json(200, {
+            'ok': True,
+            'index_html': index_ok,
+            'pages': sorted(set(PAGES.values())),
+            'root': ROOT,
+            'port': PORT
+        })
 
     # -------------------------------------------------- API: чтение
     def api_get(self, path):
@@ -476,24 +502,82 @@ class Handler(SimpleHTTPRequestHandler):
                    'text/html; charset=utf-8')
 
 
+class DualStackServer(ThreadingHTTPServer):
+    """IPv6-сокет с включённым dual-stack: принимает и ::1, и 127.0.0.1."""
+    address_family = socket.AF_INET6
+    daemon_threads = True
+    allow_reuse_address = True
+
+    def server_bind(self):
+        try:
+            self.socket.setsockopt(socket.IPPROTO_IPV6, socket.IPV6_V6ONLY, 0)
+        except (AttributeError, OSError):
+            pass
+        super().server_bind()
+
+
+def make_server(port):
+    """Пробуем dual-stack, при неудаче откатываемся на IPv4."""
+    try:
+        server = DualStackServer((HOST if HOST != '0.0.0.0' else '::', port), Handler)
+        return server
+    except OSError as exc:
+        print('  IPv6 недоступен (%s), работаем по IPv4' % exc)
+        server = ThreadingHTTPServer((HOST, port), Handler)
+        return server
+
+
+def describe_address(server):
+    try:
+        host, port, *_ = server.server_address
+        return '[%s]:%s' % (host, port) if ':' in str(host) else '%s:%s' % (host, port)
+    except Exception:
+        return 'неизвестно'
+
+
 def main():
     ensure_dirs()
     ensure_auth()
     ensure_content()
+    if not os.path.exists(LEADS):
+        write_json(LEADS, [])
     index_file = os.path.join(SITE, 'index.html')
     if not os.path.isfile(index_file):
         print('ВНИМАНИЕ: не найден %s — соберите страницы: python3 build_pages.py' % index_file)
-    if not os.path.exists(LEADS):
-        write_json(LEADS, [])
-    server = ThreadingHTTPServer((HOST, PORT), Handler)
-    print('\n  «Счастье есть» — сайт:   http://localhost:%d/' % PORT)
-    print('  Админ-панель:            http://localhost:%d/admin/' % PORT)
+
+    servers = []
+    for port in PORTS:
+        try:
+            servers.append((port, make_server(port)))
+        except OSError as exc:
+            print('  Порт %s занят (%s) — пропускаем' % (port, exc))
+
+    if not servers:
+        print('Не удалось занять ни один порт из %s' % PORTS)
+        return
+
+    print('\n  «Счастье есть» — сайт:')
+    for port, srv in servers:
+        print('    http://localhost:%d/            (админка: /admin/)' % port)
+    print('  Проверка живости:  /healthz')
+    print('  Слушает:           %s' % ', '.join(describe_address(s) for _, s in servers))
     print('  Остановить: Ctrl+C\n')
+
+    threads = []
+    for _, srv in servers:
+        t = threading.Thread(target=srv.serve_forever, daemon=True)
+        t.start()
+        threads.append(t)
+
     try:
-        server.serve_forever()
+        while any(t.is_alive() for t in threads):
+            for t in threads:
+                t.join(timeout=0.5)
     except KeyboardInterrupt:
         print('\nОстановлено.')
-        server.server_close()
+        for _, srv in servers:
+            srv.shutdown()
+            srv.server_close()
 
 
 if __name__ == '__main__':

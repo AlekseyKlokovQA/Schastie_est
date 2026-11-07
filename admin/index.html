@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Админ-панель · «Счастье есть»</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#33271F">
+<link rel="icon" type="image/svg+xml" href="../site/assets/img/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../site/assets/css/style.css">
+<style>
+  body { background: #F6F1E9; }
+  [hidden] { display: none !important; }
+
+  /* ---------- вход ---------- */
+  .login {
+    min-height: 100vh; display: grid; place-items: center; padding: 24px;
+    background: radial-gradient(circle at 30% 20%, #F3E5D6, #F6F1E9 60%);
+  }
+  .login__card {
+    width: 100%; max-width: 400px; background: #fff; border-radius: 26px;
+    padding: 36px 32px; box-shadow: 0 24px 60px rgba(51,39,31,.12); border: 1px solid var(--line);
+  }
+  .login__logo { width: 62px; height: 62px; border-radius: 50%; margin: 0 auto 18px; }
+  .login h1 { font-size: 1.9rem; text-align: center; margin-bottom: .3em; }
+  .login p { text-align: center; font-size: .88rem; color: var(--ink-mute); margin-bottom: 22px; }
+  .login .field input { background: #FBF6EF; }
+
+  /* ---------- каркас ---------- */
+  .admin { display: grid; grid-template-columns: 258px minmax(0, 1fr); min-height: 100vh; }
+  .admin__side {
+    background: #33271F; color: rgba(251,246,239,.78); padding: 26px 18px;
+    display: flex; flex-direction: column; gap: 4px; position: sticky; top: 0; height: 100vh;
+  }
+  .admin__brand { display: flex; align-items: center; gap: 11px; color: #FBF6EF; margin-bottom: 22px; padding: 0 8px; }
+  .admin__brand img { width: 40px; height: 40px; border-radius: 50%; }
+  .admin__brand b { font-family: var(--font-display); font-size: 1.16rem; display: block; line-height: 1.1; }
+  .admin__brand span { font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(251,246,239,.5); }
+  .admin__nav { display: flex; flex-direction: column; gap: 3px; }
+  .admin__nav button {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    padding: 11px 14px; border-radius: 12px; border: 0; background: transparent;
+    color: rgba(251,246,239,.78); font-family: var(--font-body); font-size: .9rem;
+    font-weight: 600; cursor: pointer; text-align: left; transition: background .2s, color .2s;
+  }
+  .admin__nav button:hover { background: rgba(251,246,239,.1); color: #fff; }
+  .admin__nav button.is-active { background: #B85C38; color: #fff; }
+  .admin__nav .count {
+    font-size: .72rem; background: rgba(251,246,239,.22); padding: 1px 8px; border-radius: 999px;
+  }
+  .admin__side-foot { margin-top: auto; padding: 0 8px; font-size: .74rem; color: rgba(251,246,239,.42); line-height: 1.6; }
+  .admin__side-foot a { color: rgba(251,246,239,.7); }
+
+  .admin__main { padding: clamp(20px, 3vw, 38px); max-width: 1180px; }
+  .admin__top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 24px; }
+  .admin__top h1 { font-size: clamp(1.5rem, 2.6vw, 2.1rem); margin: 0; }
+  .admin__top p { margin: 4px 0 0; color: var(--ink-mute); font-size: .86rem; }
+
+  .notice {
+    display: flex; gap: 12px; background: #FFF7E8; border: 1px solid #EBD7AE;
+    color: #6B4F14; padding: 13px 17px; border-radius: 14px; font-size: .84rem; margin-bottom: 20px;
+  }
+  .notice--ok { background: #EFF6EC; border-color: #C8DEC1; color: #3C5A34; }
+  .notice--err { background: #FDF1EF; border-color: #F0C6BE; color: #8E2D1D; }
+
+  .stats { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; margin-bottom: 24px; }
+  .stat { background: #fff; border-radius: 18px; padding: 18px 20px; border: 1px solid var(--line); }
+  .stat__label { font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 8px; }
+  .stat__value { font-family: var(--font-display); font-size: 2rem; line-height: 1; }
+  .stat__meta { font-size: .74rem; color: var(--ink-mute); margin-top: 5px; }
+
+  .panel { background: #fff; border-radius: 20px; border: 1px solid var(--line); overflow: hidden; margin-bottom: 20px; }
+  .panel__head { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid var(--line); }
+  .panel__head h2 { font-size: 1.2rem; margin: 0; font-family: var(--font-body); font-weight: 700; }
+  .panel__body { padding: 20px; }
+  .panel__tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+  .admin input[type=text], .admin input[type=email], .admin input[type=search], .admin input[type=password],
+  .admin input[type=date], .admin select, .admin textarea {
+    padding: 10px 13px; border-radius: 10px; border: 1px solid rgba(51,39,31,.16);
+    background: #FBF6EF; font-family: var(--font-body); font-size: .9rem; color: var(--ink); width: 100%;
+  }
+  .admin input:focus, .admin select:focus, .admin textarea:focus {
+    outline: none; border-color: var(--terracotta); box-shadow: 0 0 0 3px rgba(184,92,56,.13);
+  }
+  .btn--sm { padding: 9px 18px; font-size: .82rem; }
+  .btn--danger { background: #B33A26; color: #fff; }
+  .btn--danger:hover { background: #962F1E; color: #fff; }
+
+  .table-wrap { overflow-x: auto; }
+  table.leads { width: 100%; border-collapse: collapse; font-size: .88rem; }
+  table.leads th {
+    text-align: left; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--ink-mute); padding: 12px 14px; border-bottom: 1px solid var(--line); white-space: nowrap;
+  }
+  table.leads td { padding: 13px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  table.leads tr:last-child td { border-bottom: 0; }
+  .lead-name { font-weight: 700; }
+  .sub { display: block; font-size: .78rem; color: var(--ink-mute); font-weight: 400; margin-top: 2px; }
+  .status-select { padding: 6px 9px; font-size: .8rem; border-radius: 8px; width: auto; min-width: 130px; }
+  .type-pill { display: inline-block; padding: 3px 10px; border-radius: 999px; background: #F3EADF; font-size: .74rem; font-weight: 700; color: var(--terracotta-dark); }
+  .empty { padding: 34px 20px; text-align: center; color: var(--ink-mute); font-size: .9rem; }
+
+  /* ---------- фото ---------- */
+  .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)); gap: 16px; }
+  .photo-card { border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: #FBF6EF; }
+  .photo-card__preview { position: relative; aspect-ratio: 4/3; background: #E9DCCB; overflow: hidden; }
+  .photo-card__preview img { width: 100%; height: 100%; object-fit: cover; }
+  .photo-card__preview.is-broken::after {
+    content: "нет файла"; position: absolute; inset: 0; display: grid; place-items: center;
+    font-size: .76rem; color: var(--ink-mute); background: repeating-linear-gradient(45deg,#F3EADF,#F3EADF 10px,#E9DCCB 10px,#E9DCCB 20px);
+  }
+  .photo-card__body { padding: 12px; }
+  .photo-card__label { font-size: .8rem; font-weight: 700; margin-bottom: 6px; }
+  .photo-card__hint { font-size: .72rem; color: var(--ink-mute); margin-bottom: 8px; line-height: 1.4; min-height: 2.1em; }
+  .photo-card input[type=text] { font-size: .76rem; padding: 7px 9px; }
+  .photo-card__actions { display: flex; gap: 6px; margin-top: 8px; }
+  .photo-card__actions .btn { flex: 1; padding: 7px 10px; font-size: .76rem; }
+
+  .promo-item { border: 1px solid var(--line); border-radius: 16px; padding: 16px; margin-bottom: 12px; background: #FBF6EF; }
+  .promo-item__head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+  .promo-item__head b { font-size: .84rem; }
+  .promo-item .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+  .promo-item label { display: block; font-size: .72rem; font-weight: 700; color: var(--ink-mute); margin-bottom: 4px; letter-spacing: .04em; }
+
+  @media (max-width: 900px) {
+    .admin { grid-template-columns: 1fr; }
+    .admin__side { position: static; height: auto; flex-direction: row; flex-wrap: wrap; align-items: center; }
+    .admin__brand { margin-bottom: 0; }
+    .admin__nav { flex-direction: row; flex-wrap: wrap; }
+    .admin__side-foot { margin: 0; width: 100%; }
+    .stats { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .promo-item .row2 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== ВХОД ==================== -->
+<div class="login" id="login">
+  <div class="login__card">
+    <img class="login__logo" src="../site/assets/img/logo.svg" alt="">
+    <h1>Админ-панель</h1>
+    <p>«Счастье есть» · управление сайтом</p>
+    <form id="login-form">
+      <div class="field" style="margin-bottom:14px">
+        <label for="password">Пароль</label>
+        <input id="password" type="password" name="password" autocomplete="current-password" placeholder="••••••••" required>
+      </div>
+      <button class="btn btn--primary btn--block" type="submit">Войти</button>
+      <div class="form-status" id="login-status" role="status" aria-live="polite"></div>
+    </form>
+    <p style="margin-top:18px;font-size:.76rem;line-height:1.6">
+      Пароль по умолчанию печатается в консоли при запуске <code>python3 app.py</code>.
+      Сменить его можно во вкладке «Настройки».
+    </p>
+  </div>
+</div>
+
+<!-- ==================== ПАНЕЛЬ ==================== -->
+<div class="admin" id="admin" hidden>
+  <aside class="admin__side">
+    <div class="admin__brand">
+      <img src="../site/assets/img/logo.svg" alt="">
+      <div><b>Счастье есть</b><span>Панель управления</span></div>
+    </div>
+    <nav class="admin__nav">
+      <button data-tab="dashboard" class="is-active">Обзор</button>
+      <button data-tab="leads">Заявки <span class="count" data-count-new>0</span></button>
+      <button data-tab="photos">Фотографии</button>
+      <button data-tab="promos">Акции</button>
+      <button data-tab="settings">Настройки</button>
+    </nav>
+    <div class="admin__side-foot">
+      <a href="../site/index.html" target="_blank">Открыть сайт ↗</a><br>
+      <span data-session-note>Сессия защищена cookie</span><br>
+      <button class="btn btn--sm btn--ghost" style="margin-top:10px;color:rgba(251,246,239,.7);border-color:rgba(251,246,239,.25)" id="logout">Выйти</button>
+    </div>
+  </aside>
+
+  <main class="admin__main">
+    <div class="admin__top">
+      <div>
+        <h1 id="tab-title">Обзор</h1>
+        <p id="tab-note">Сводка по заявкам и быстрые действия</p>
+      </div>
+      <div class="panel__tools">
+        <button class="btn btn--ghost btn--sm" id="reload">Обновить</button>
+        <a class="btn btn--ghost btn--sm" href="/api/export.csv">Экспорт CSV</a>
+      </div>
+    </div>
+
+    <div id="flash"></div>
+
+    <!-- ОБЗОР -->
+    <section data-panel="dashboard">
+      <div class="stats">
+        <div class="stat"><div class="stat__label">Всего заявок</div><div class="stat__value" data-stat-total>0</div><div class="stat__meta">за всё время</div></div>
+        <div class="stat"><div class="stat__label">Новые</div><div class="stat__value" data-stat-new>0</div><div class="stat__meta">нужно ответить</div></div>
+        <div class="stat"><div class="stat__label">В работе</div><div class="stat__value" data-stat-progress>0</div><div class="stat__meta">обсуждаем детали</div></div>
+        <div class="stat"><div class="stat__label">Подписки</div><div class="stat__value" data-stat-subs>0</div><div class="stat__meta">согласились на письма</div></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel__head"><h2>Последние заявки</h2><a class="btn btn--ghost btn--sm" href="#" data-goto="leads">Все заявки →</a></div>
+        <div class="table-wrap"><table class="leads"><thead><tr><th>Контакт</th><th>Тип</th><th>Дата</th><th>Получена</th><th>Статус</th></tr></thead><tbody data-recent></tbody></table></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel__head"><h2>Быстрые действия</h2></div>
+        <div class="panel__body" style="display:flex;flex-wrap:wrap;gap:10px">
+          <button class="btn btn--ghost btn--sm" data-goto="photos">Заменить фото на сайте</button>
+          <button class="btn btn--ghost btn--sm" data-goto="promos">Добавить акцию</button>
+          <a class="btn btn--ghost btn--sm" href="../site/booking.html" target="_blank">Проверить форму заявки</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ЗАЯВКИ -->
+    <section data-panel="leads" hidden>
+      <div class="panel">
+        <div class="panel__head">
+          <h2>Заявки</h2>
+          <div class="panel__tools">
+            <input type="search" placeholder="Имя или телефон" data-search style="max-width:220px">
+            <select data-filter style="max-width:180px">
+              <option value="">Все статусы</option>
+              <option value="new">Новые</option>
+              <option value="progress">В работе</option>
+              <option value="done">Забронированы</option>
+              <option value="cancel">Отказ</option>
+            </select>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="leads">
+            <thead><tr><th>Контакт</th><th>Тип / тема</th><th>Дата / гости</th><th>Комментарий</th><th>Получена</th><th>Статус</th><th></th></tr></thead>
+            <tbody data-leads-body></tbody>
+          </table>
+          <div class="empty" data-empty hidden>Заявок нет. Отправьте тестовую с сайта — появится здесь.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ФОТО -->
+    <section data-panel="photos" hidden>
+      <div class="notice">
+        <span>🖼</span>
+        <div>Каждое поле — фото для конкретного блока сайта. Можно вставить ссылку или загрузить файл (до 8 МБ). Изменения применяются сразу после «Сохранить».</div>
+      </div>
+      <div class="panel">
+        <div class="panel__head">
+          <h2>Фотографии сайта</h2>
+          <div class="panel__tools">
+            <button class="btn btn--ghost btn--sm" data-fill-yandex>Подставить фото из карточки</button>
+            <button class="btn btn--primary btn--sm" data-save-photos>Сохранить</button>
+          </div>
+        </div>
+        <div class="panel__body"><div class="photo-grid" data-photo-grid></div></div>
+      </div>
+    </section>
+
+    <!-- АКЦИИ -->
+    <section data-panel="promos" hidden>
+      <div class="notice"><span>🎁</span><div>Акции выводятся на главной странице в блоке «Сейчас действует». Порядок — как в списке. Пустой список скрывает блок.</div></div>
+      <div class="panel">
+        <div class="panel__head">
+          <h2>Акции и спецпредложения</h2>
+          <div class="panel__tools">
+            <button class="btn btn--ghost btn--sm" data-add-promo>+ Добавить акцию</button>
+            <button class="btn btn--primary btn--sm" data-save-promos>Сохранить</button>
+          </div>
+        </div>
+        <div class="panel__body" data-promo-list></div>
+      </div>
+    </section>
+
+    <!-- НАСТРОЙКИ -->
+    <section data-panel="settings" hidden>
+      <div class="panel">
+        <div class="panel__head"><h2>Смена пароля</h2></div>
+        <div class="panel__body" style="max-width:420px">
+          <form id="password-form">
+            <div class="field"><label for="new-pass">Новый пароль (минимум 6 символов)</label><input id="new-pass" type="password" autocomplete="new-password" required></div>
+            <button class="btn btn--primary btn--sm" type="submit">Сменить пароль</button>
+            <div class="form-status" id="pass-status" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel__head"><h2>Как это устроено</h2></div>
+        <div class="panel__body">
+          <p style="font-size:.9rem;color:var(--ink-soft)">Заявки и настройки хранятся в папке <code>data/</code> на этом сервере: <code>leads.json</code> — заявки, <code>content.json</code> — фото и акции, <code>uploads/</code> — загруженные изображения. Резервная копия — это копия папки <code>data/</code>.</p>
+          <p style="font-size:.9rem;color:var(--ink-soft)">Приём заявок: все формы сайта отправляют POST на <code>/api/leads</code>. Чтобы перенаправить их в Telegram или CRM, замените адрес в <code>site/assets/js/main.js</code> (переменная <code>endpoint</code>).</p>
+          <p style="font-size:.9rem;color:var(--ink-soft)">Публикация на Тильде: см. <code>TILDA_SETUP.md</code> — там блоки, формы и приветственная анимация по шагам.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var state = { content: { photos: {}, promos: [] }, leads: [], tab: 'dashboard' };
+
+  var PHOTO_FIELDS = [
+    { key: 'entrance', label: 'Главный вход', hint: 'Обложка главной, страницы контактов и первый экран заставки' },
+    { key: 'guests1', label: 'Гости заведения', hint: 'Первый экран главной и блок «Галерея»' },
+    { key: 'guests2', label: 'В зале', hint: 'Блок «О нас» и страница заявки' },
+    { key: 'guests3', label: 'Встречи за столом', hint: 'Галерея, «Гости»' },
+    { key: 'guests4', label: 'Компания', hint: 'Галерея, «Гости»' },
+    { key: 'guests5', label: 'Гости', hint: 'Галерея, «Гости»' },
+    { key: 'menu1', label: 'Меню: витрина', hint: 'Главная «О нас», страница меню' },
+    { key: 'menu2', label: 'Меню: зал', hint: 'Главная «О нас», страница меню' },
+    { key: 'menu3', label: 'Меню: десерты', hint: 'Обложка страницы меню' },
+    { key: 'menu4', label: 'Меню: детали', hint: 'Страница меню' },
+    { key: 'master1', label: 'Мастер-классы: обложка', hint: 'Обложка страницы мастер-классов' },
+    { key: 'master2', label: 'Мастер-классы: участники', hint: 'Галерея мастер-классов' },
+    { key: 'master3', label: 'Мастер-классы: работы', hint: 'Главная, блок «Мастер-классы»' },
+    { key: 'master4', label: 'Мастер-классы: материалы', hint: 'Галерея и форма записи' },
+    { key: 'master5', label: 'Мастер-классы: атмосфера', hint: 'Галерея мастер-классов' },
+    { key: 'master6', label: 'Мастер-классы: стол', hint: 'Галерея мастер-классов' },
+    { key: 'event1', label: 'Мероприятия: обложка', hint: 'Обложка страницы мероприятий' },
+    { key: 'event2', label: 'Мероприятия: стол', hint: 'Галерея и форма заявки' },
+    { key: 'event3', label: 'Мероприятия: гости', hint: 'Галерея мероприятий' },
+    { key: 'event4', label: 'Мероприятия: декор', hint: 'Галерея мероприятий' },
+    { key: 'event5', label: 'Мероприятия: вечер', hint: 'Галерея мероприятий' }
+  ];
+
+  var YANDEX_DEFAULTS = {
+    entrance: 'https://avatars.mds.yandex.net/get-altay/10766931/2a0000019247a50d1c09f97fce652e8803a3/XXXL',
+    guests1: 'https://avatars.mds.yandex.net/get-altay/10700095/2a0000018cbc87ef060ef9ce3eedd668a49d/XXXL',
+    guests2: 'https://avatars.mds.yandex.net/get-altay/10700095/2a0000018cbc8054b0aed411cbfdf2f5da2d/XXXL',
+    guests3: 'https://avatars.mds.yandex.net/get-altay/11187599/2a0000018cbc880da6775a3d6696ca81a4b8/XXXL',
+    guests4: 'https://avatars.mds.yandex.net/get-altay/13072111/2a0000018ef00b7746b0e63985d978d0b426/XXXL',
+    guests5: 'https://avatars.mds.yandex.net/get-altay/10647561/2a0000018d36aa786e95dd0dafc0b3efed74/XXXL',
+    menu1: 'https://avatars.mds.yandex.net/get-altay/11018317/2a0000018cbc80be39818072da4bc6a2886a/XXXL',
+    menu2: 'https://avatars.mds.yandex.net/get-altay/6382111/2a0000018cbc809395ac079d1d286f434f9d/XXXL',
+    menu3: 'https://avatars.mds.yandex.net/get-altay/892711/2a0000018cbc8093d9b247cebbd7f2950d66/XXXL',
+    menu4: 'https://avatars.mds.yandex.net/get-altay/10700956/2a0000018cbc8093d40d2c330207f4bbe358/XXXL',
+    master1: 'https://avatars.mds.yandex.net/get-altay/11203687/2a000001928aa901c504a27dda58db9872b2/XXXL',
+    master2: 'https://avatars.mds.yandex.net/get-altay/11356085/2a000001928aa901cc3db3f92f046716b653/XXXL',
+    master3: 'https://avatars.mds.yandex.net/get-altay/14091921/2a000001928aa9079589c77cf430107fac5e/XXXL',
+    master4: 'https://avatars.mds.yandex.net/get-altay/13474366/2a000001928aa9015971c1ac59465d0e805c/XXXL',
+    master5: 'https://avatars.mds.yandex.net/get-altay/13790728/2a000001928aa901f60545791c9985568b71/XXXL',
+    master6: 'https://avatars.mds.yandex.net/get-altay/14097168/2a000001928aa901e042589b6492bb005179/XXXL',
+    event1: 'https://avatars.mds.yandex.net/get-altay/13797017/2a000001928aa9731bf200ae689d02706328/XXXL',
+    event2: 'https://avatars.mds.yandex.net/get-altay/13906970/2a000001928aa97570eb0a712b428bdd0abe/XXXL',
+    event3: 'https://avatars.mds.yandex.net/get-altay/14238289/2a000001928aa972cfdd2f63588ead45a07f/XXXL',
+    event4: 'https://avatars.mds.yandex.net/get-altay/14165812/2a000001928aa97926cdd1890b2f0569f792/XXXL',
+    event5: 'https://avatars.mds.yandex.net/get-altay/13929277/2a000001928aa973675fde3c29be02f92635/XXXL'
+  };
+
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var esc = function (s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  };
+
+  function flash(text, type) {
+    var host = $('#flash');
+    if (!host) return;
+    host.innerHTML = '<div class="notice notice--' + (type || 'ok') + '"><span>✓</span><div>' + esc(text) + '</div></div>';
+    setTimeout(function () { if (host.innerHTML.indexOf(text) !== -1) host.innerHTML = ''; }, 4200);
+  }
+
+  function api(path, options) {
+    return fetch(path, Object.assign({ credentials: 'same-origin' }, options || {})).
+      then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (data) {
+          if (!r.ok) throw new Error(data.error || ('HTTP ' + r.status));
+          return data;
+        });
+      });
+  }
+
+  /* ---------------- вход ---------------- */
+  function checkSession() {
+    return api('/api/session').then(function (data) {
+      if (data.authenticated) {
+        $('#login').hidden = true;
+        $('#admin').hidden = false;
+        bootstrap();
+      } else {
+        $('#login').hidden = false;
+        $('#admin').hidden = true;
+      }
+    }).catch(function () {
+      $('#login-status').textContent = 'Сервер не отвечает. Запустите python3 app.py';
+      $('#login-status').className = 'form-status is-error';
+    });
+  }
+
+  $('#login-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var status = $('#login-status');
+    status.textContent = '';
+    api('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: $('#password').value })
+    }).then(function () {
+      $('#password').value = '';
+      checkSession();
+    }).catch(function (err) {
+      status.textContent = err.message;
+      status.className = 'form-status is-error';
+    });
+  });
+
+  $('#logout').addEventListener('click', function () {
+    api('/api/logout', { method: 'POST' }).then(function () { location.reload(); });
+  });
+
+  /* ---------------- вкладки ---------------- */
+  var TITLES = {
+    dashboard: ['Обзор', 'Сводка по заявкам и быстрые действия'],
+    leads: ['Заявки', 'Все обращения с сайта: фильтры, статусы и экспорт'],
+    photos: ['Фотографии', 'Замена изображений в блоках сайта'],
+    promos: ['Акции', 'Спецпредложения на главной странице'],
+    settings: ['Настройки', 'Пароль и данные']
+  };
+
+  function setTab(name) {
+    state.tab = name;
+    $$('.admin__nav button').forEach(function (b) {
+      b.classList.toggle('is-active', b.getAttribute('data-tab') === name);
+    });
+    $$('[data-panel]').forEach(function (p) {
+      p.hidden = p.getAttribute('data-panel') !== name;
+    });
+    $('#tab-title').textContent = TITLES[name][0];
+    $('#tab-note').textContent = TITLES[name][1];
+  }
+
+  $$('.admin__nav button').forEach(function (btn) {
+    btn.addEventListener('click', function () { setTab(btn.getAttribute('data-tab')); });
+  });
+  document.addEventListener('click', function (e) {
+    var target = e.target.closest('[data-goto]');
+    if (!target) return;
+    e.preventDefault();
+    setTab(target.getAttribute('data-goto'));
+  });
+
+  /* ---------------- заявки ---------------- */
+  function fmtDate(iso) {
+    if (!iso) return '—';
+    var d = new Date(iso);
+    if (isNaN(d.getTime())) return iso;
+    return d.toLocaleDateString('ru-RU', { day: '2-digit', month: 'short' }) + ', ' +
+      d.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+  }
+
+  function statusOptions(lead) {
+    return [['new', 'Новая'], ['progress', 'В работе'], ['done', 'Забронирована'], ['cancel', 'Отказ']]
+      .map(function (pair) {
+        return '<option value="' + pair[0] + '"' + (lead.status === pair[0] ? ' selected' : '') + '>' + pair[1] + '</option>';
+      }).join('');
+  }
+
+  function renderLeads() {
+    var body = $('[data-leads-body]');
+    var q = ($('[data-search]').value || '').toLowerCase().trim();
+    var f = $('[data-filter]').value;
+    var list = state.leads.filter(function (lead) {
+      var okStatus = !f || lead.status === f;
+      var okQuery = !q || (String(lead.name) + ' ' + String(lead.phone) + ' ' + String(lead.email)).toLowerCase().indexOf(q) !== -1;
+      return okStatus && okQuery;
+    });
+
+    body.innerHTML = list.map(function (lead) {
+      return '<tr>' +
+        '<td class="lead-name">' + esc(lead.name) +
+          '<span class="sub">' + esc(lead.phone) + (lead.email && lead.email !== '—' ? ' · ' + esc(lead.email) : '') + '</span>' +
+          (lead.subscribe ? '<span class="sub">✓ подписка на новости</span>' : '') + '</td>' +
+        '<td><span class="type-pill">' + esc(lead.type) + '</span><span class="sub">' + esc(lead.topic || '—') + '</span></td>' +
+        '<td>' + esc(lead.date || '—') + '<span class="sub">гостей: ' + esc(lead.guests || '—') + '</span></td>' +
+        '<td style="max-width:280px">' + (lead.message ? esc(lead.message) : '<span style="color:#9A897B">—</span>') + '</td>' +
+        '<td style="white-space:nowrap">' + fmtDate(lead.createdAt) + '</td>' +
+        '<td><select class="status-select" data-id="' + esc(lead.id) + '">' + statusOptions(lead) + '</select></td>' +
+        '<td><button class="btn btn--ghost btn--sm" data-delete="' + esc(lead.id) + '" title="Удалить">✕</button></td>' +
+      '</tr>';
+    }).join('');
+
+    $('[data-empty]').hidden = list.length > 0;
+
+    var recent = $('[data-recent]');
+    recent.innerHTML = state.leads.slice(0, 5).map(function (lead) {
+      return '<tr>' +
+        '<td class="lead-name">' + esc(lead.name) + '<span class="sub">' + esc(lead.phone) + '</span></td>' +
+        '<td><span class="type-pill">' + esc(lead.type) + '</span></td>' +
+        '<td>' + esc(lead.date || '—') + '</td>' +
+        '<td>' + fmtDate(lead.createdAt) + '</td>' +
+        '<td>' + esc({ new: 'Новая', progress: 'В работе', done: 'Забронирована', cancel: 'Отказ' }[lead.status] || lead.status) + '</td>' +
+      '</tr>';
+    }).join('') || '<tr><td colspan="5" class="empty">Пока нет заявок</td></tr>';
+  }
+
+  function renderStats() {
+    var n = { new: 0, progress: 0, done: 0, cancel: 0 };
+    state.leads.forEach(function (l) { n[l.status] = (n[l.status] || 0) + 1; });
+    $('[data-stat-total]').textContent = state.leads.length;
+    $('[data-stat-new]').textContent = n.new;
+    $('[data-stat-progress]').textContent = n.progress;
+    $('[data-stat-subs]').textContent = state.leads.filter(function (l) { return l.subscribe; }).length;
+    var badge = $('[data-count-new]');
+    if (badge) badge.textContent = n.new;
+  }
+
+  function loadLeads() {
+    return api('/api/leads').then(function (data) {
+      state.leads = data.leads || [];
+      renderLeads();
+      renderStats();
+    });
+  }
+
+  document.addEventListener('change', function (e) {
+    var sel = e.target.closest('.status-select');
+    if (!sel) return;
+    api('/api/leads/status', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: sel.getAttribute('data-id'), status: sel.value })
+    }).then(function () {
+      var lead = state.leads.filter(function (l) { return l.id === sel.getAttribute('data-id'); })[0];
+      if (lead) lead.status = sel.value;
+      renderStats();
+      flash('Статус обновлён');
+    }).catch(function (err) { flash(err.message, 'err'); });
+  });
+
+  document.addEventListener('click', function (e) {
+    var del = e.target.closest('[data-delete]');
+    if (!del) return;
+    if (!confirm('Удалить заявку безвозвратно?')) return;
+    api('/api/leads/delete', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: del.getAttribute('data-delete') })
+    }).then(loadLeads).then(function () { flash('Заявка удалена'); }).
+      catch(function (err) { flash(err.message, 'err'); });
+  });
+
+  $('[data-search]').addEventListener('input', renderLeads);
+  $('[data-filter]').addEventListener('change', renderLeads);
+
+  /* ---------------- фото ---------------- */
+  function renderPhotos() {
+    var grid = $('[data-photo-grid]');
+    grid.innerHTML = PHOTO_FIELDS.map(function (field) {
+      var url = state.content.photos[field.key] || '';
+      return '<div class="photo-card" data-key="' + field.key + '">' +
+        '<div class="photo-card__preview"><img src="' + esc(url || '../site/assets/img/logo.svg') + '" alt=""></div>' +
+        '<div class="photo-card__body">' +
+          '<div class="photo-card__label">' + esc(field.label) + '</div>' +
+          '<div class="photo-card__hint">' + esc(field.hint) + '</div>' +
+          '<input type="text" value="' + esc(url) + '" placeholder="Ссылка на изображение" data-photo-url>' +
+          '<div class="photo-card__actions">' +
+            '<button class="btn btn--ghost btn--sm" data-photo-upload>Загрузить</button>' +
+            '<button class="btn btn--ghost btn--sm" data-photo-clear>Очистить</button>' +
+          '</div>' +
+          '<input type="file" accept="image/*" hidden data-photo-file>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+
+    $$('.photo-card__preview img').forEach(function (img) {
+      img.addEventListener('error', function () {
+        img.parentNode.classList.add('is-broken');
+        img.src = '../site/assets/img/logo.svg';
+      });
+    });
+  }
+
+  document.addEventListener('input', function (e) {
+    var input = e.target.closest('[data-photo-url]');
+    if (!input) return;
+    var card = input.closest('.photo-card');
+    var img = $('.photo-card__preview img', card);
+    $('.photo-card__preview', card).classList.remove('is-broken');
+    img.src = input.value || '../site/assets/img/logo.svg';
+  });
+
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-photo-upload]');
+    if (btn) {
+      var card = btn.closest('.photo-card');
+      $('[data-photo-file]', card).click();
+      return;
+    }
+    var clear = e.target.closest('[data-photo-clear]');
+    if (clear) {
+      var box = clear.closest('.photo-card');
+      $('[data-photo-url]', box).value = '';
+      $('.photo-card__preview img', box).src = '../site/assets/img/logo.svg';
+      $('.photo-card__preview', box).classList.remove('is-broken');
+    }
+  });
+
+  document.addEventListener('change', function (e) {
+    var file = e.target.closest('[data-photo-file]');
+    if (!file || !file.files[0]) return;
+    var card = file.closest('.photo-card');
+    var form = new FormData();
+    form.append('file', file.files[0]);
+    flash('Загружаем…', 'ok');
+    api('/api/upload', { method: 'POST', body: form }).then(function (data) {
+      $('[data-photo-url]', card).value = data.url;
+      var img = $('.photo-card__preview img', card);
+      img.src = data.url;
+      $('.photo-card__preview', card).classList.remove('is-broken');
+      flash('Файл загружен — нажмите «Сохранить»');
+    }).catch(function (err) { flash(err.message, 'err'); });
+  });
+
+  $('[data-fill-yandex]').addEventListener('click', function () {
+    PHOTO_FIELDS.forEach(function (field) {
+      var card = $('[data-key="' + field.key + '"]');
+      if (!card) return;
+      var url = YANDEX_DEFAULTS[field.key] || '';
+      $('[data-photo-url]', card).value = url;
+      var img = $('.photo-card__preview img', card);
+      img.src = url || '../site/assets/img/logo.svg';
+      $('.photo-card__preview', card).classList.remove('is-broken');
+    });
+    flash('Подставлены ссылки из карточки Яндекс.Карт');
+  });
+
+  $('[data-save-photos]').addEventListener('click', function () {
+    var photos = {};
+    $$('.photo-card').forEach(function (card) {
+      photos[card.getAttribute('data-key')] = $('[data-photo-url]', card).value.trim();
+    });
+    api('/api/content', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ photos: photos })
+    }).then(function (data) {
+      state.content = data.content;
+      flash('Фотографии сохранены — обновите сайт');
+    }).catch(function (err) { flash(err.message, 'err'); });
+  });
+
+  /* ---------------- акции ---------------- */
+  function promoRow(promo, index) {
+    return '<div class="promo-item" data-promo-index="' + index + '">' +
+      '<div class="promo-item__head"><b>Акция ' + (index + 1) + '</b>' +
+        '<button class="btn btn--ghost btn--sm" data-promo-remove>Удалить</button></div>' +
+      '<div class="row2">' +
+        '<div><label>Заголовок</label><input type="text" data-promo-field="title" value="' + esc(promo.title || '') + '" placeholder="Кофе + выпечка = 390 ₽"></div>' +
+        '<div><label>Плашка</label><input type="text" data-promo-field="badge" value="' + esc(promo.badge || '') + '" placeholder="Хит / до 30 ноября"></div>' +
+      '</div>' +
+      '<div style="margin-bottom:10px"><label>Описание</label><textarea data-promo-field="text" rows="2" placeholder="Что именно предлагаете и на каких условиях">' + esc(promo.text || '') + '</textarea></div>' +
+      '<div class="row2"><div><label>Действует до (необязательно)</label><input type="text" data-promo-field="until" value="' + esc(promo.until || '') + '" placeholder="30 ноября"></div></div>' +
+    '</div>';
+  }
+
+  function renderPromos() {
+    var list = $('[data-promo-list]');
+    if (!state.content.promos.length) {
+      list.innerHTML = '<div class="empty">Акций нет. Добавьте первую — она появится на главной.</div>';
+      return;
+    }
+    list.innerHTML = state.content.promos.map(promoRow).join('');
+  }
+
+  $('[data-add-promo]').addEventListener('click', function () {
+    state.content.promos.push({ title: '', text: '', badge: '', until: '' });
+    renderPromos();
+  });
+
+  document.addEventListener('click', function (e) {
+    var rm = e.target.closest('[data-promo-remove]');
+    if (!rm) return;
+    var item = rm.closest('[data-promo-index]');
+    state.content.promos.splice(Number(item.getAttribute('data-promo-index')), 1);
+    renderPromos();
+  });
+
+  $('[data-save-promos]').addEventListener('click', function () {
+    var promos = $$('[data-promo-index]').map(function (item) {
+      var promo = {};
+      $$('[data-promo-field]', item).forEach(function (field) {
+        promo[field.getAttribute('data-promo-field')] = field.value;
+      });
+      return promo;
+    }).filter(function (p) { return p.title && p.title.trim(); });
+
+    api('/api/content', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ promos: promos })
+    }).then(function (data) {
+      state.content = data.content;
+      renderPromos();
+      flash('Акции сохранены');
+    }).catch(function (err) { flash(err.message, 'err'); });
+  });
+
+  /* ---------------- пароль и загрузка ---------------- */
+  $('#password-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var status = $('#pass-status');
+    api('/api/password', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: $('#new-pass').value })
+    }).then(function () {
+      $('#new-pass').value = '';
+      status.textContent = 'Пароль изменён';
+      status.className = 'form-status is-success';
+    }).catch(function (err) {
+      status.textContent = err.message;
+      status.className = 'form-status is-error';
+    });
+  });
+
+  $('#reload').addEventListener('click', function () { loadAll(); flash('Данные обновлены'); });
+
+  function loadAll() {
+    return Promise.all([
+      loadLeads(),
+      api('/api/content').then(function (data) { state.content = data; })
+    ]).then(function () {
+      renderPhotos();
+      renderPromos();
+    }).catch(function (err) { flash(err.message, 'err'); });
+  }
+
+  function bootstrap() {
+    loadAll().then(function () {
+      setTab(location.hash ? location.hash.slice(1) : 'dashboard');
+    });
+  }
+
+  checkSession();
+})();
+</script>
+</body>
+</html>

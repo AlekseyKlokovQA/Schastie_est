@@ -1,0 +1,45 @@
+{
+  "photos": {
+    "entrance": "https://avatars.mds.yandex.net/get-altay/10766931/2a0000019247a50d1c09f97fce652e8803a3/XXXL",
+    "guests1": "https://avatars.mds.yandex.net/get-altay/10700095/2a0000018cbc87ef060ef9ce3eedd668a49d/XXXL",
+    "guests2": "https://avatars.mds.yandex.net/get-altay/10700095/2a0000018cbc8054b0aed411cbfdf2f5da2d/XXXL",
+    "guests3": "https://avatars.mds.yandex.net/get-altay/11187599/2a0000018cbc880da6775a3d6696ca81a4b8/XXXL",
+    "guests4": "https://avatars.mds.yandex.net/get-altay/13072111/2a0000018ef00b7746b0e63985d978d0b426/XXXL",
+    "guests5": "https://avatars.mds.yandex.net/get-altay/10647561/2a0000018d36aa786e95dd0dafc0b3efed74/XXXL",
+    "menu1": "https://avatars.mds.yandex.net/get-altay/11018317/2a0000018cbc80be39818072da4bc6a2886a/XXXL",
+    "menu2": "https://avatars.mds.yandex.net/get-altay/6382111/2a0000018cbc809395ac079d1d286f434f9d/XXXL",
+    "menu3": "https://avatars.mds.yandex.net/get-altay/892711/2a0000018cbc8093d9b247cebbd7f2950d66/XXXL",
+    "menu4": "https://avatars.mds.yandex.net/get-altay/10700956/2a0000018cbc8093d40d2c330207f4bbe358/XXXL",
+    "master1": "https://avatars.mds.yandex.net/get-altay/11203687/2a000001928aa901c504a27dda58db9872b2/XXXL",
+    "master2": "https://avatars.mds.yandex.net/get-altay/11356085/2a000001928aa901cc3db3f92f046716b653/XXXL",
+    "master3": "https://avatars.mds.yandex.net/get-altay/14091921/2a000001928aa9079589c77cf430107fac5e/XXXL",
+    "master4": "https://avatars.mds.yandex.net/get-altay/13474366/2a000001928aa9015971c1ac59465d0e805c/XXXL",
+    "master5": "https://avatars.mds.yandex.net/get-altay/13790728/2a000001928aa901f60545791c9985568b71/XXXL",
+    "master6": "https://avatars.mds.yandex.net/get-altay/14097168/2a000001928aa901e042589b6492bb005179/XXXL",
+    "event1": "https://avatars.mds.yandex.net/get-altay/13797017/2a000001928aa9731bf200ae689d02706328/XXXL",
+    "event2": "https://avatars.mds.yandex.net/get-altay/13906970/2a000001928aa97570eb0a712b428bdd0abe/XXXL",
+    "event3": "https://avatars.mds.yandex.net/get-altay/14238289/2a000001928aa972cfdd2f63588ead45a07f/XXXL",
+    "event4": "https://avatars.mds.yandex.net/get-altay/14165812/2a000001928aa97926cdd1890b2f0569f792/XXXL",
+    "event5": "https://avatars.mds.yandex.net/get-altay/13929277/2a000001928aa973675fde3c29be02f92635/XXXL"
+  },
+  "promos": [
+    {
+      "title": "Кофе + выпечка = 390 ₽",
+      "text": "По будням до 12:00: любой кофе 250–300 мл и свежая выпечка из витрины по специальной цене. Хороший повод зайти по пути на работу.",
+      "badge": "До 12:00 по будням",
+      "until": ""
+    },
+    {
+      "title": "Мастер-класс в подарок к празднику",
+      "text": "При заказе праздника под ключ от 11 900 ₽ — получасовой творческий мастер-класс для детей в подарок. Уточняйте при бронировании.",
+      "badge": "К празднику",
+      "until": ""
+    },
+    {
+      "title": "Первый кофе — за знакомство",
+      "text": "Покажите этот сайт администратору при первом визите и получите сироп или добавку к кофе бесплатно.",
+      "badge": "Новым гостям",
+      "until": ""
+    }
+  ]
+}

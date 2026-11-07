@@ -1,0 +1,187 @@
+<!-- ============================================================
+     «Счастье есть» — приветственная анимация для Tilda
+     Блок: T123 (HTML-код), ставится первым блоком главной страницы.
+
+     Что делать:
+       1. Добавить блок T123 на главную.
+       2. Вставить этот код целиком.
+       3. Отступы блока — 0 со всех сторон.
+       4. Сохранить и опубликовать.
+
+     Настройки — в блоке SETTINGS.
+     ============================================================ -->
+<div id="hs-welcome">
+  <div class="hs-w-r"></div>
+  <div class="hs-w-r hs-w-r2"></div>
+
+  <div class="hs-w-inner">
+    <div class="hs-w-mark">
+      <!-- Замените на своё логотип из медиатеки Tilda -->
+      <img src="https://static.tildacdn.com/lib/logo/tild3433-3961-4130-b933-333966353661/logo.svg"
+           alt="Счастье есть">
+    </div>
+    <div class="hs-w-title"><span>Счастье</span> <span>есть</span></div>
+    <p class="hs-w-sub">Кофейня · лофт · мастер-классы</p>
+    <div class="hs-w-bar"><i></i></div>
+  </div>
+
+  <button class="hs-w-skip" type="button">Пропустить</button>
+</div>
+
+<style>
+  #hs-welcome {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: grid;
+    place-items: center;
+    background: #FBF6EF;
+    color: #33271F;
+    overflow: hidden;
+    transition: opacity .8s cubic-bezier(.22,.61,.36,1), visibility .8s;
+    font-family: Manrope, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  }
+  #hs-welcome.is-closing { opacity: 0; visibility: hidden; }
+  body.hs-locked { overflow: hidden; }
+
+  .hs-w-r {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 46vmax;
+    height: 46vmax;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(.2);
+    opacity: 0;
+    background: radial-gradient(circle, rgba(184,92,56,.16), rgba(184,92,56,0) 68%);
+    animation: hsRipple 3.6s cubic-bezier(.22,.61,.36,1) infinite;
+  }
+  .hs-w-r2 { animation-delay: 1.2s; }
+  @keyframes hsRipple {
+    0%   { transform: translate(-50%,-50%) scale(.2); opacity: 0; }
+    30%  { opacity: .85; }
+    100% { transform: translate(-50%,-50%) scale(1); opacity: 0; }
+  }
+
+  .hs-w-inner { position: relative; z-index: 2; text-align: center; padding: 24px; }
+
+  .hs-w-mark img {
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    margin: 0 auto 22px;
+    display: block;
+    object-fit: cover;
+    box-shadow: 0 18px 42px rgba(51,39,31,.16);
+    animation: hsMark 1s cubic-bezier(.22,.61,.36,1) both;
+  }
+  @keyframes hsMark {
+    from { opacity: 0; transform: scale(.7) translateY(14px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  .hs-w-title {
+    font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    font-size: clamp(2.6rem, 7vw, 4.6rem);
+    line-height: 1;
+    font-weight: 600;
+    letter-spacing: -.02em;
+  }
+  .hs-w-title span { display: inline-block; opacity: 0; animation: hsWord .85s cubic-bezier(.22,.61,.36,1) both; }
+  .hs-w-title span:nth-child(1) { animation-delay: .28s; }
+  .hs-w-title span:nth-child(2) { animation-delay: .46s; font-style: italic; color: #B85C38; }
+  @keyframes hsWord {
+    from { opacity: 0; transform: translateY(26px) rotate(2deg); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  .hs-w-sub {
+    margin: 14px 0 26px;
+    font-size: .74rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: #9A897B;
+    opacity: 0;
+    animation: hsFade .8s cubic-bezier(.22,.61,.36,1) .8s both;
+  }
+  @keyframes hsFade { to { opacity: 1; } }
+
+  .hs-w-bar { width: 168px; height: 2px; background: #E9DCCB; margin: 0 auto; border-radius: 2px; overflow: hidden; }
+  .hs-w-bar i { display: block; height: 100%; width: 0; background: #B85C38; animation: hsBar 2.1s cubic-bezier(.22,.61,.36,1) .2s forwards; }
+  @keyframes hsBar { to { width: 100%; } }
+
+  .hs-w-skip {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: transparent;
+    border: 1px solid rgba(51,39,31,.12);
+    border-radius: 999px;
+    padding: 9px 20px;
+    font-family: inherit;
+    font-size: .78rem;
+    font-weight: 600;
+    color: #9A897B;
+    cursor: pointer;
+    transition: color .2s, border-color .2s;
+  }
+  .hs-w-skip:hover { color: #33271F; border-color: rgba(51,39,31,.3); }
+
+  @media (prefers-reduced-motion: reduce) {
+    #hs-welcome { display: none !important; }
+    .hs-w-r, .hs-w-mark img, .hs-w-title span, .hs-w-sub, .hs-w-bar i {
+      animation-duration: .001ms !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+</style>
+
+<script>
+(function () {
+  // ---------------- НАСТРОЙКИ ----------------
+  var SETTINGS = {
+    showMs: 2700,      // сколько миллисекунд показывать заставку
+    always: false,     // true — показывать при каждом заходе, false — раз за сессию
+    storageKey: 'hs_welcome_seen'
+  };
+  // ------------------------------------------
+
+  var el = document.getElementById('hs-welcome');
+  if (!el) return;
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var seen = false;
+  try { seen = sessionStorage.getItem(SETTINGS.storageKey) === '1'; } catch (e) {}
+
+  if (reduce || (seen && !SETTINGS.always)) {
+    el.parentNode.removeChild(el);
+    return;
+  }
+
+  document.body.classList.add('hs-locked');
+
+  var finished = false;
+  function finish() {
+    if (finished) return;
+    finished = true;
+    el.classList.add('is-closing');
+    try { sessionStorage.setItem(SETTINGS.storageKey, '1'); } catch (e) {}
+    document.body.classList.remove('hs-locked');
+    setTimeout(function () {
+      if (el.parentNode) el.parentNode.removeChild(el);
+    }, 900);
+  }
+
+  var timer = setTimeout(finish, SETTINGS.showMs);
+  var skip = el.querySelector('.hs-w-skip');
+  if (skip) skip.addEventListener('click', function () { clearTimeout(timer); finish(); });
+
+  el.addEventListener('click', function (e) {
+    if (e.target === el) { clearTimeout(timer); finish(); }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { clearTimeout(timer); finish(); }
+  });
+})();
+</script>

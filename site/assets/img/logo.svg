@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Логотип «Счастье есть»">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#C9704A"/>
+      <stop offset="1" stop-color="#A94E2C"/>
+    </linearGradient>
+    <linearGradient id="cup" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFDF9"/>
+      <stop offset="1" stop-color="#F3E3D2"/>
+    </linearGradient>
+  </defs>
+  <circle cx="256" cy="256" r="248" fill="url(#bg)"/>
+  <circle cx="256" cy="256" r="230" fill="none" stroke="#FBF6EF" stroke-opacity=".28" stroke-width="3"/>
+  <path d="M238 208c0-26-20-38-20-60 0-24 20-36 32-52 10 16 26 26 26 48 0 16-10 24-10 34 0 10 8 14 8 26 0 12-10 20-18 20s-18-6-18-16z"
+        fill="#FBF6EF" opacity=".95"/>
+  <path d="M292 196c22 0 40 16 40 38s-18 34-40 34" fill="none" stroke="url(#cup)" stroke-width="20" stroke-linecap="round"/>
+  <path d="M176 196h132c0 62-6 108-24 128-14 16-44 20-52 20s-38-4-52-20c-18-20-24-66-24-128z" fill="url(#cup)"/>
+  <ellipse cx="242" cy="198" rx="66" ry="16" fill="#FBF6EF"/>
+  <ellipse cx="242" cy="198" rx="52" ry="10" fill="#8B4A2E" opacity=".55"/>
+  <path d="M232 186c-14-8-30-2-30 10 0 12 16 16 24 10 8 6 24 4 30-6" fill="none" stroke="#FBF6EF" stroke-width="6" stroke-linecap="round" opacity=".9"/>
+  <ellipse cx="242" cy="356" rx="76" ry="12" fill="#FBF6EF" opacity=".9"/>
+  <path d="M300 300c14 0 26 10 26 24s-12 26-26 26" fill="none" stroke="#FBF6EF" stroke-width="8" opacity=".35"/>
+</svg>

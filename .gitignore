@@ -1,0 +1,11 @@
+# данные и загрузки — не публикуем
+data/leads.json
+data/auth.json
+data/uploads/*
+!data/uploads/.gitkeep
+
+# служебное
+__pycache__/
+*.pyc
+.DS_Store
+.env

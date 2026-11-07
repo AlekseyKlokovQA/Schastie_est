@@ -25,7 +25,7 @@ WELCOME = """<!-- ПРИВЕТСТВЕННАЯ АНИМАЦИЯ -->
   <span class="welcome__ripple"></span>
   <span class="welcome__ripple"></span>
   <div class="welcome__inner">
-    <div class="welcome__mark"><img data-img="entrance" src="assets/img/logo.svg" alt="«Счастье есть»"></div>
+    <div class="welcome__mark"><img data-img="entrance" src="assets/img/logo-green.svg" alt="«Счастье есть»"></div>
     <div class="welcome__title"><span>Счастье</span> <span>есть</span></div>
     <p class="welcome__sub">Кофейня · лофт · мастер-классы</p>
     <div class="welcome__bar"><i></i></div>
@@ -43,7 +43,7 @@ def header(active):
     return """<header class="header">
   <div class="header__inner">
     <a class="brand" href="index.html" aria-label="Счастье есть — на главную">
-      <img class="brand__mark" src="assets/img/logo.svg" alt="">
+      <img class="brand__mark" src="assets/img/logo-green.svg" alt="">
       <span class="brand__text">
         <span class="brand__name">Счастье есть</span>
         <span class="brand__sub">Орехово-Зуево</span>
@@ -67,7 +67,7 @@ FOOTER = """<footer class="footer">
     <div class="footer__grid">
       <div>
         <a class="footer__brand" href="index.html">
-          <img src="assets/img/logo.svg" alt="">
+          <img src="assets/img/logo-green.svg" alt="">
           <b>Счастье есть</b>
         </a>
         <p style="font-size:.9rem;max-width:32ch">Лофт-пространство, кофейня и мастер-классы в Орехово-Зуево. Кофе на каждый день, выпечка и праздники под ключ.</p>
@@ -141,7 +141,7 @@ HEAD = """<!DOCTYPE html>
 <meta property="og:title" content="%s">
 <meta property="og:description" content="%s">
 <meta property="og:image" content="%s">
-<link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+<link rel="icon" type="image/svg+xml" href="assets/img/logo-green.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">

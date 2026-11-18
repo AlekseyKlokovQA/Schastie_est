@@ -9,7 +9,14 @@
 import os
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-SITE = os.path.join(ROOT, "site")
+
+# Куда собирать html.
+#   по умолчанию — site/  (для локального сервера app.py)
+#   GH_PAGES=1   — docs/  (готовый статический сайт для GitHub Pages)
+# GitHub Pages не умеет отдавать файлы выше корня публикации, поэтому в
+# docs/ рядом с html кладётся копия data/ — иначе не подгрузятся фото и акции.
+PUBLISH = os.environ.get("GH_PAGES") == "1"
+SITE = os.path.join(ROOT, "docs" if PUBLISH else "site")
 
 NAV = [
     ("index.html", "Главная"),

@@ -187,14 +187,34 @@ data/
 ├── site/
 │   ├── index.html … privacy.html
 │   └── assets/{css,js,img}
+├── docs/                   готовый статический сайт для GitHub Pages
 ├── admin/index.html        админ-панель
 ├── data/                   заявки, контент, пароль, загрузки
+├── build_gh_pages.py       сборка docs/ для GitHub Pages
 ├── tilda/welcome-block.html код анимации для Тильды
 ├── TILDA_SETUP.md          инструкция по переносу
 └── README.md               этот файл
 ```
 
 Пересобрать страницы после правок текста в `build_pages.py`: `python3 build_pages.py`.
+
+### Публикация на GitHub Pages
+
+Сайт живёт в подпапке `site/`, а GitHub Pages раздаёт только файлы внутри
+корня публикации и не отдаёт ничего выше него. Поэтому для Pages собирается
+отдельная папка `docs/`: html + копия `assets/` + копия `data/content.json`
+рядом (иначе не подгрузятся фото и акции).
+
+```bash
+python3 build_gh_pages.py     # → docs/
+git add docs && git commit -m "build: обновить docs" && git push
+```
+
+В настройках репозитория: **Settings → Pages → Source: Deploy from a branch →
+Branch: `main`, папка `/docs`**.
+
+Админка и приём заявок на GitHub Pages не работают: это статический хостинг
+без Python. Панель доступна только при локальном запуске (`./start.sh`).
 
 ---
 
